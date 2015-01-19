@@ -1,0 +1,42 @@
+{
+	"name": "arachne/security",
+	"type": "library",
+	"keywords": [ "nette", "arachne", "security" ],
+	"authors": [
+		{
+			"name": "Jáchym Toušek",
+			"homepage": "http://enumag.cz",
+			"email": "enumag@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"arachne/di-helpers": "~0.1"
+		"nette/di": "~2.2",
+		"nette/http": "~2.2",
+		"nette/security": "~2.2",
+		"nette/utils": "~2.2",
+	},
+	"require-dev": {
+		"php": ">=5.5.0",
+		"arachne/devtools": "~0.1",
+		"nette/nette": "~2.2",
+	},
+	"autoload": {
+		"psr-4": {
+			"Arachne\\Security\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Unit\\": "tests/unit/src",
+			"Tests\\Integration\\": "tests/integration/src"
+		}
+	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "http://packages.m33.cz"
+		}
+	]
+}
