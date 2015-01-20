@@ -2,6 +2,7 @@
 
 namespace Arachne\Security;
 
+use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\Http\UserStorage as BaseUserStorage;
 use Nette\Security\IIdentity;
@@ -15,8 +16,9 @@ class UserStorage extends BaseUserStorage
 	/** @var IdentityValidatorInterface */
 	private $identityValidator;
 
-	public function __construct(IdentityValidatorInterface $identityValidator = NULL)
+	public function __construct(Session $session, dentityValidatorInterface $identityValidator = NULL)
 	{
+		parent::__construct($session);
 		$this->identityValidator = $identityValidator;
 	}
 
