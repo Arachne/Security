@@ -11,16 +11,16 @@
 	],
 	"require": {
 		"php": ">=5.3.0",
-		"arachne/di-helpers": "~0.1"
+		"arachne/di-helpers": "~0.1",
 		"nette/di": "~2.2",
 		"nette/http": "~2.2",
 		"nette/security": "~2.2",
-		"nette/utils": "~2.2",
+		"nette/utils": "~2.2"
 	},
 	"require-dev": {
 		"php": ">=5.5.0",
 		"arachne/devtools": "~0.1",
-		"nette/nette": "~2.2",
+		"nette/nette": "~2.2"
 	},
 	"autoload": {
 		"psr-4": {
