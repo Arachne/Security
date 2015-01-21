@@ -20,6 +20,7 @@
 	"require-dev": {
 		"php": ">=5.5.0",
 		"arachne/devtools": "~0.1",
+		"kdyby/fake-session": "dev-master",
 		"nette/nette": "~2.2"
 	},
 	"autoload": {
