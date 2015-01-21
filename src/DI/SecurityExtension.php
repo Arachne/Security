@@ -60,6 +60,7 @@ class SecurityExtension extends CompilerExtension
 				$builder->getDefinition($this->prefix('storage.' . $firewall))
 					->setArguments([
 						'identityValidator' => '@' . $name,
+						'namespace' => $firewall,
 					]);
 			} else {
 				throw new AssertionException("Identity validator '$name' of firewall '$firewall' could not be passed to corresponding storage.");

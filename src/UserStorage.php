@@ -16,9 +16,15 @@ class UserStorage extends BaseUserStorage
 	/** @var IdentityValidatorInterface */
 	private $identityValidator;
 
-	public function __construct(Session $session, dentityValidatorInterface $identityValidator = NULL)
+	/**
+	 * @param string $namespace
+	 * @param Session $session
+	 * @param IdentityValidatorInterface $identityValidator
+	 */
+	public function __construct($namespace, Session $session, IdentityValidatorInterface $identityValidator = NULL)
 	{
 		parent::__construct($session);
+		$this->setNamespace($namespace);
 		$this->identityValidator = $identityValidator;
 	}
 
