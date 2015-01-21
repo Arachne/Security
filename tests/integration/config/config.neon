@@ -2,14 +2,23 @@ extensions:
 	nette: Nette\Bridges\Framework\NetteExtension
 	arachne.dihelpers: Arachne\DIHelpers\DI\DIHelpersExtension
 	arachne.security: Arachne\Security\DI\SecurityExtension
-	enumag.application: Enumag\Application\DI\ApplicationExtension
+	kdyby.fakesession: Kdyby\FakeSession\DI\FakeSessionExtension
 
 nette:
 	application:
-		catchExceptions: null
 		mapping:
 			*: Tests\Integration\Classes\*Presenter
 
+arachne.security:
+	firewalls:
+		- admin
+
 services:
-	routerFactory: Tests\Integration\Classes\RouterFactory
-	router: @routerFactory::create()
+	identityValidator:
+		class: Tests\Integration\Classes\IdentityValidator
+		tags:
+			arachne.security.identityValidator: admin
+	authorizator:
+		class: Tests\Integration\Classes\Authorizator
+		tags:
+			arachne.security.authorizator: admin

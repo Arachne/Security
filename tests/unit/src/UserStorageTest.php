@@ -12,7 +12,7 @@ use Mockery\MockInterface;
 use Nette\Security\IIdentity;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class UserStorageTest extends Test
 {

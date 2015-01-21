@@ -2,6 +2,8 @@
 
 namespace Arachne\Security;
 
+use Nette\Security\IIdentity;
+
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
