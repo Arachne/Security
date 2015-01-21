@@ -32,7 +32,9 @@ class SecurityExtension extends CompilerExtension
 		foreach ($config['firewalls'] as $firewall) {
 			$builder->addDefinition($this->prefix('storage.' . $firewall))
 				->setClass('Arachne\Security\UserStorage')
-				->addSetup('setNamespace', $firewall)
+				->setArguments([
+					'namespace' => $firewall,
+				])
 				->setAutowired(FALSE);
 
 			$builder->addDefinition($this->prefix('firewall.' . $firewall))
@@ -44,10 +46,10 @@ class SecurityExtension extends CompilerExtension
 				->setAutowired(FALSE);
 		}
 
-		$this->addDefinition($this->prefix('firewallResolver'))
+		$builder->addDefinition($this->prefix('firewallResolver'))
 			->addTag(DIHelpersExtension::TAG_RESOLVER, self::TAG_FIREWALL);
 
-		$this->addDefinition($this->prefix('authorizatorResolver'))
+		$builder->addDefinition($this->prefix('authorizatorResolver'))
 			->addTag(DIHelpersExtension::TAG_RESOLVER, self::TAG_AUTHORIZATOR);
 	}
 
@@ -59,8 +61,8 @@ class SecurityExtension extends CompilerExtension
 			if ($builder->hasDefinition($this->prefix('storage.' . $firewall))) {
 				$builder->getDefinition($this->prefix('storage.' . $firewall))
 					->setArguments([
-						'identityValidator' => '@' . $name,
 						'namespace' => $firewall,
+						'identityValidator' => '@' . $name,
 					]);
 			} else {
 				throw new AssertionException("Identity validator '$name' of firewall '$firewall' could not be passed to corresponding storage.");
