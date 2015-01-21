@@ -16,6 +16,9 @@ class UserStorage extends BaseUserStorage
 	/** @var IdentityValidatorInterface */
 	private $identityValidator;
 
+	/** @var SessionSection */
+	private $sessionSection;
+
 	/**
 	 * @param string $namespace
 	 * @param Session $session
@@ -34,26 +37,28 @@ class UserStorage extends BaseUserStorage
 	 */
 	protected function getSessionSection($need)
 	{
-		$section = parent::getSessionSection($need);
+		if (!$this->sessionSection) {
+			$this->sessionSection = $section = parent::getSessionSection($need);
 
-		if ($this->identityValidator && $section && $section->authenticated) {
-			$identity = $this->identityValidator->validateIdentity($section->identity);
+			if ($this->identityValidator && $section && $section->authenticated) {
+				$identity = $this->identityValidator->validateIdentity($section->identity);
 
-			if ($identity instanceof IIdentity) {
-				$section->identity = $identity;
+				if ($identity instanceof IIdentity) {
+					$section->identity = $identity;
 
-			} else {
-				$section->authenticated = FALSE;
-				$section->reason = FirewallInterface::LOGOUT_INVALID_IDENTITY;
-				if ($section->expireIdentity) {
-					unset($section->identity);
+				} else {
+					$section->authenticated = FALSE;
+					$section->reason = FirewallInterface::LOGOUT_INVALID_IDENTITY;
+					if ($section->expireIdentity) {
+						unset($section->identity);
+					}
+					unset($section->expireTime, $section->expireDelta, $section->expireIdentity,
+						$section->expireBrowser, $section->browserCheck, $section->authTime);
 				}
-				unset($section->expireTime, $section->expireDelta, $section->expireIdentity,
-					$section->expireBrowser, $section->browserCheck, $section->authTime);
 			}
 		}
 
-		return $section;
+		return $this->sessionSection;
 	}
 
 }
