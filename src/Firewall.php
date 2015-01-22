@@ -37,6 +37,15 @@ class Firewall extends Object
 	}
 
 	/**
+	 * @param string $role	
+	 * @return bool
+	 */
+	public function isInRole($role)
+	{
+		return $this->isLoggedIn() && in_array($role, $this->getIdentity()->getRoles(), TRUE);
+	}
+
+	/**
 	 * @param IIdentity $identity
 	 */
 	public function login(IIdentity $identity)

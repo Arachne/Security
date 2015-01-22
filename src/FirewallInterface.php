@@ -29,6 +29,12 @@ interface FirewallInterface
 	public function isLoggedIn();
 
 	/**
+	 * @param string $role	
+	 * @return bool
+	 */
+	public function isInRole($role);
+
+	/**
 	 * @param IIdentity $identity
 	 */
 	public function login(IIdentity $identity);
