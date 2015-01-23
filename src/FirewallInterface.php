@@ -29,7 +29,7 @@ interface FirewallInterface
 	public function isLoggedIn();
 
 	/**
-	 * @param string $role	
+	 * @param string $role
 	 * @return bool
 	 */
 	public function isInRole($role);

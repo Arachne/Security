@@ -17,7 +17,7 @@ use Nette\Security\IUserStorage;
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Firewall extends Object
+class Firewall extends Object implements FirewallInterface
 {
 
 	/** @var IUserStorage */
@@ -37,7 +37,7 @@ class Firewall extends Object
 	}
 
 	/**
-	 * @param string $role	
+	 * @param string $role
 	 * @return bool
 	 */
 	public function isInRole($role)
