@@ -10,7 +10,7 @@
 
 namespace Arachne\Security;
 
-use Nette\Security\IIdentity;
+use Nette\Security\IResource;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
@@ -21,9 +21,8 @@ interface AuthorizatorInterface
 	/**
 	 * @param string|IResource $resource
 	 * @param string $privilege
-	 * @param IIdentity $identity
 	 * @return bool
 	 */
-	public function isAllowed($resource, $privilege, IIdentity $identity);
+	public function isAllowed($resource, $privilege);
 
 }
