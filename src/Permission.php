@@ -48,7 +48,7 @@ class Permission extends BasePermission
 				return Callback::invoke($assertion, $this->identity, $this->getQueriedResource(), $this->getQueriedRole());
 			};
 		}
-		return $this->allow($roles, $resources, $privileges, $assertion);
+		return parent::allow($roles, $resources, $privileges, $assertion);
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Permission extends BasePermission
 				return Callback::invoke($assertion, $this->identity, $this->getQueriedResource(), $this->getQueriedRole());
 			};
 		}
-		return $this->deny($roles, $resources, $privileges, $assertion);
+		return parent::deny($roles, $resources, $privileges, $assertion);
 	}
 
 }
