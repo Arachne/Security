@@ -36,21 +36,29 @@ class SecurityExtension extends CompilerExtension
 
 		Validators::assertField($config, 'firewalls', 'array');
 
-		foreach ($config['firewalls'] as $firewall) {
-			$builder->addDefinition($this->prefix('storage.' . $firewall))
-				->setClass('Arachne\Security\UserStorage')
-				->setArguments([
-					'namespace' => $firewall,
-				])
-				->setAutowired(FALSE);
+		foreach ($config['firewalls'] as $firewall => $class) {
+			if (!is_string($firewall)) {
+				$firewall = $class;
+				$class = 'Arachne\Security\Firewall';
+			}
 
-			$builder->addDefinition($this->prefix('firewall.' . $firewall))
-				->setClass('Arachne\Security\Firewall')
-				->setArguments([
-					'storage' => $this->prefix('@storage.' . $firewall),
-				])
+			$service = $builder->addDefinition($this->prefix('firewall.' . $firewall))
+				->setClass($class)
 				->addTag(self::TAG_FIREWALL, $firewall)
 				->setAutowired(FALSE);
+
+			if ($class === 'Arachne\Security\Firewall' || is_subclass_of($class, 'Arachne\Security\Firewall')) {
+				$builder->addDefinition($this->prefix('storage.' . $firewall))
+					->setClass('Arachne\Security\UserStorage')
+					->setArguments([
+						'namespace' => $firewall,
+					])
+					->setAutowired(FALSE);
+
+				$service->setArguments([
+					'storage' => $this->prefix('@storage.' . $firewall),
+				]);
+			}
 		}
 
 		$extension = $this->getExtension('Arachne\DIHelpers\DI\DIHelpersExtension');
