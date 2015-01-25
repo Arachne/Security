@@ -44,8 +44,7 @@ class SecurityExtension extends CompilerExtension
 
 			$service = $builder->addDefinition($this->prefix('firewall.' . $firewall))
 				->setClass($class)
-				->addTag(self::TAG_FIREWALL, $firewall)
-				->setAutowired(FALSE);
+				->addTag(self::TAG_FIREWALL, $firewall);
 
 			if ($class === 'Arachne\Security\Firewall' || is_subclass_of($class, 'Arachne\Security\Firewall')) {
 				$builder->addDefinition($this->prefix('storage.' . $firewall))
