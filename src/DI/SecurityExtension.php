@@ -10,8 +10,7 @@
 
 namespace Arachne\Security\DI;
 
-use Arachne\DIHelpers\DI\DIHelpersExtension;
-use Nette\DI\CompilerExtension;
+use Arachne\DIHelpers\CompilerExtension;
 use Nette\Utils\AssertionException;
 use Nette\Utils\Validators;
 
@@ -54,11 +53,9 @@ class SecurityExtension extends CompilerExtension
 				->setAutowired(FALSE);
 		}
 
-		$builder->addDefinition($this->prefix('firewallResolver'))
-			->addTag(DIHelpersExtension::TAG_RESOLVER, self::TAG_FIREWALL);
-
-		$builder->addDefinition($this->prefix('authorizatorResolver'))
-			->addTag(DIHelpersExtension::TAG_RESOLVER, self::TAG_AUTHORIZATOR);
+		$extension = $this->getExtension('Arachne\DIHelpers\DI\DIHelpersExtension');
+		$extension->addResolver(self::TAG_FIREWALL, 'Arachne\Security\FirewallInterface');
+		$extension->addResolver(self::TAG_AUTHORIZATOR, 'Arachne\Security\AuthorizatorInterface');
 	}
 
 	public function beforeCompile()
