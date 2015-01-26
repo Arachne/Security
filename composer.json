@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.0",
+		"php": ">=5.4.0",
 		"arachne/di-helpers": "~0.2",
 		"nette/di": "~2.2",
 		"nette/http": "~2.2",
