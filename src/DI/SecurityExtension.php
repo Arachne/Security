@@ -39,16 +39,16 @@ class SecurityExtension extends CompilerExtension
 		foreach ($config['firewalls'] as $firewall => $class) {
 			if (!is_string($firewall)) {
 				$firewall = $class;
-				$class = 'Arachne\Security\Firewall';
+				$class = 'Arachne\Security\Authentication\Firewall';
 			}
 
 			$service = $builder->addDefinition($this->prefix('firewall.' . $firewall))
 				->setClass($class)
 				->addTag(self::TAG_FIREWALL, $firewall);
 
-			if ($class === 'Arachne\Security\Firewall' || is_subclass_of($class, 'Arachne\Security\Firewall')) {
+			if ($class === 'Arachne\Security\Authentication\Firewall' || is_subclass_of($class, 'Arachne\Security\Authentication\Firewall')) {
 				$builder->addDefinition($this->prefix('storage.' . $firewall))
-					->setClass('Arachne\Security\UserStorage')
+					->setClass('Arachne\Security\Authentication\UserStorage')
 					->setArguments([
 						'namespace' => $firewall,
 					])
@@ -61,8 +61,8 @@ class SecurityExtension extends CompilerExtension
 		}
 
 		$extension = $this->getExtension('Arachne\DIHelpers\DI\DIHelpersExtension');
-		$extension->addResolver(self::TAG_FIREWALL, 'Arachne\Security\FirewallInterface');
-		$extension->addResolver(self::TAG_AUTHORIZATOR, 'Arachne\Security\AuthorizatorInterface');
+		$extension->addResolver(self::TAG_FIREWALL, 'Arachne\Security\Authentication\FirewallInterface');
+		$extension->addResolver(self::TAG_AUTHORIZATOR, 'Arachne\Security\Authorization\AuthorizatorInterface');
 	}
 
 	public function beforeCompile()

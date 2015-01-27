@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Classes;
 
-use Arachne\Security\AuthorizatorInterface;
+use Arachne\Security\Authorization\AuthorizatorInterface;
 use Nette\Object;
 
 /**

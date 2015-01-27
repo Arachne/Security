@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Arachne\Security\Permission;
+use Arachne\Security\Authorization\Permission;
 use Codeception\TestCase\Test;
 use Mockery;
 use Nette\Security\IIdentity;

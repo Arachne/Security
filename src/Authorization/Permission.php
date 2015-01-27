@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the file license.md that was distributed with this source code.
  */
 
-namespace Arachne\Security;
+namespace Arachne\Security\Authorization;
 
 use Nette\Security\IIdentity;
 use Nette\Security\Permission as BasePermission;

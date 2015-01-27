@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Arachne\Security\FirewallInterface;
-use Arachne\Security\IdentityValidatorInterface;
-use Arachne\Security\UserStorage;
+use Arachne\Security\Authentication\FirewallInterface;
+use Arachne\Security\Authentication\IdentityValidatorInterface;
+use Arachne\Security\Authentication\UserStorage;
 use Codeception\TestCase\Test;
 use Kdyby\FakeSession\Session;
 use Mockery;

@@ -3,7 +3,7 @@
 namespace Tests\Integration;
 
 use Arachne\DIHelpers\ResolverInterface;
-use Arachne\Security\Firewall;
+use Arachne\Security\Authentication\Firewall;
 use Kdyby\FakeSession\Session;
 use Nette\DI\Container;
 use Nette\Security\Identity;

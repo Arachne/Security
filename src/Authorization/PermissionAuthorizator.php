@@ -8,10 +8,9 @@
  * For the full copyright and license information, please view the file license.md that was distributed with this source code.
  */
 
-namespace Arachne\Security;
+namespace Arachne\Security\Authorization;
 
-use Arachne\Security\AuthorizatorInterface;
-use Arachne\Security\Permission;
+use Arachne\Security\Authentication\FirewallInterface;
 use Nette\Object;
 use Nette\Security\IResource;
 

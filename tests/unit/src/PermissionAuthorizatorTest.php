@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Arachne\Security\FirewallInterface;
-use Arachne\Security\Permission;
-use Arachne\Security\PermissionAuthorizator;
+use Arachne\Security\Authentication\FirewallInterface;
+use Arachne\Security\Authorization\Permission;
+use Arachne\Security\Authorization\PermissionAuthorizator;
 use Codeception\TestCase\Test;
 use Mockery;
 use Mockery\MockInterface;

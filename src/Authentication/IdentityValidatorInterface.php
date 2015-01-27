@@ -8,21 +8,19 @@
  * For the full copyright and license information, please view the file license.md that was distributed with this source code.
  */
 
-namespace Arachne\Security;
+namespace Arachne\Security\Authentication;
 
-use Nette\Security\IResource;
+use Nette\Security\IIdentity;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-interface AuthorizatorInterface
+interface IdentityValidatorInterface
 {
 
 	/**
-	 * @param string|IResource $resource
-	 * @param string $privilege
-	 * @return bool
+	 * @return IIdentity
 	 */
-	public function isAllowed($resource, $privilege);
+	public function validateIdentity(IIdentity $identity);
 
 }

@@ -3,7 +3,7 @@
 namespace Tests\Integration;
 
 use Arachne\DIHelpers\ResolverInterface;
-use Arachne\Security\AuthorizatorInterface;
+use Arachne\Security\Authorization\AuthorizatorInterface;
 use Nette\DI\Container;
 
 /**

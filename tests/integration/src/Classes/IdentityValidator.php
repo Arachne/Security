@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\Classes;
 
-use Arachne\Security\IdentityValidatorInterface;
+use Arachne\Security\Authentication\IdentityValidatorInterface;
 use Nette\Object;
 use Nette\Security\IIdentity;
 

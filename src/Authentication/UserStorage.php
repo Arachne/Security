@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the file license.md that was distributed with this source code.
  */
 
-namespace Arachne\Security;
+namespace Arachne\Security\Authentication;
 
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
@@ -46,7 +46,7 @@ class UserStorage extends BaseUserStorage
 	protected function getSessionSection($need)
 	{
 		if (!$this->sessionSection) {
-			$this->sessionSection = $section = parent::getSessionSection($need);
+			$section = parent::getSessionSection($need);
 
 			if ($this->identityValidator && $section && $section->authenticated) {
 				$identity = $this->identityValidator->validateIdentity($section->identity);
@@ -64,6 +64,8 @@ class UserStorage extends BaseUserStorage
 						$section->expireBrowser, $section->browserCheck, $section->authTime);
 				}
 			}
+
+			$this->sessionSection = $section;
 		}
 
 		return $this->sessionSection;
