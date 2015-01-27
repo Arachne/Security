@@ -29,23 +29,6 @@ class Firewall extends Object implements FirewallInterface
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function isLoggedIn()
-	{
-		return $this->storage->isAuthenticated();
-	}
-
-	/**
-	 * @param string $role
-	 * @return bool
-	 */
-	public function isInRole($role)
-	{
-		return $this->isLoggedIn() && in_array($role, $this->getIdentity()->getRoles(), TRUE);
-	}
-
-	/**
 	 * @param IIdentity $identity
 	 */
 	public function login(IIdentity $identity)
@@ -67,7 +50,7 @@ class Firewall extends Object implements FirewallInterface
 	 */
 	public function getIdentity()
 	{
-		return $this->isLoggedIn() ? $this->storage->getIdentity() : NULL;
+		return $this->storage->isAuthenticated() ? $this->storage->getIdentity() : NULL;
 	}
 
 	/**

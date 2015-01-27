@@ -35,7 +35,6 @@ class FirewallResolverTest extends Test
 		$firewall = $this->resolver->resolve('admin');
 
 		$this->assertInstanceOf(Firewall::class, $firewall);
-		$this->assertTrue($firewall->isLoggedIn());
 		$this->assertTrue($firewall->getIdentity()->validated);
 	}
 
