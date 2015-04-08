@@ -6,9 +6,10 @@ use Arachne\Security\Authentication\FirewallInterface;
 use Arachne\Security\Authentication\IdentityValidatorInterface;
 use Arachne\Security\Authentication\UserStorage;
 use Codeception\TestCase\Test;
-use Kdyby\FakeSession\Session;
+use Kdyby\FakeSession\SessionSection;
 use Mockery;
 use Mockery\MockInterface;
+use Nette\Http\Session;
 use Nette\Security\IIdentity;
 
 /**
@@ -28,14 +29,19 @@ class UserStorageTest extends Test
 
 	protected function _before()
 	{
+		$section = Mockery::mock(SessionSection::class);
+		$section->makePartial();
+
 		$this->session = Mockery::mock(Session::class);
-		$this->session->shouldReceive('exists')
+		$this->session
+			->shouldReceive('exists')
 			->once()
 			->andReturn(TRUE);
-		$this->session->shouldReceive('getSection')
+		$this->session
+			->shouldReceive('getSection')
 			->twice()
 			->with('Nette.Http.UserStorage/test')
-			->passthru();
+			->andReturn($section);
 
 		$this->identityValidator = Mockery::mock(IdentityValidatorInterface::class);
 		$this->userStorage = new UserStorage('test', $this->session, $this->identityValidator);

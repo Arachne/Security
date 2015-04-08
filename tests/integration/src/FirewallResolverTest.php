@@ -4,8 +4,8 @@ namespace Tests\Integration;
 
 use Arachne\DIHelpers\ResolverInterface;
 use Arachne\Security\Authentication\Firewall;
-use Kdyby\FakeSession\Session;
 use Nette\DI\Container;
+use Nette\Http\Session;
 use Nette\Security\Identity;
 
 /**
@@ -25,7 +25,7 @@ class FirewallResolverTest extends Test
 	public function testIdentityValidator()
 	{
 		$session = $this->guy->grabService(Session::class);
-		$session->exists = TRUE;
+		$session->setFakeExists(TRUE);
 
 		$section = $session->getSection('Nette.Http.UserStorage/admin');
 		$section->authenticated = TRUE;

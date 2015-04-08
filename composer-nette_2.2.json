@@ -1,21 +1,11 @@
 {
-	"name": "arachne/security",
-	"type": "library",
-	"keywords": [ "nette", "arachne", "security" ],
-	"authors": [
-		{
-			"name": "Jáchym Toušek",
-			"homepage": "http://enumag.cz",
-			"email": "enumag@gmail.com"
-		}
-	],
 	"require": {
 		"php": ">=5.4.0",
-		"arachne/di-helpers": "~0.2",
-		"nette/di": "~2.2",
-		"nette/http": "~2.2",
-		"nette/security": "~2.2",
-		"nette/utils": "~2.2"
+		"arachne/di-helpers": "~0.2.0",
+		"nette/di": "~2.2.0",
+		"nette/http": "~2.2.0",
+		"nette/security": "~2.2.0",
+		"nette/utils": "~2.2.0"
 	},
 	"require-dev": {
 		"php": ">=5.5.0",
@@ -25,13 +15,8 @@
 		"codeception/mockery-module": "~0.2",
 		"kdyby/fake-session": "~2.0",
 		"mockery/mockery": "~0.9",
-		"nette/di": "~2.3",
-		"nette/http": "~2.3",
-		"nette/robot-loader": "~2.3",
-		"nette/security": "~2.3",
-		"nette/utils": "~2.3",
-		"squizlabs/php_codesniffer": "~2.0",
-		"tracy/tracy": "~2.3"
+		"nette/nette": "~2.2.0",
+		"squizlabs/php_codesniffer": "~2.0"
 	},
 	"autoload": {
 		"psr-4": {
