@@ -52,7 +52,7 @@ class SecurityExtension extends CompilerExtension
 					->setArguments([
 						'namespace' => $firewall,
 					])
-					->setAutowired(FALSE);
+					->setAutowired(false);
 
 				$service->setArguments([
 					'storage' => $this->prefix('@storage.' . $firewall),

@@ -25,12 +25,12 @@ class FirewallResolverTest extends Test
 	public function testIdentityValidator()
 	{
 		$session = $this->guy->grabService(Session::class);
-		$session->setFakeExists(TRUE);
+		$session->setFakeExists(true);
 
 		$section = $session->getSection('Nette.Http.UserStorage/admin');
-		$section->authenticated = TRUE;
+		$section->authenticated = true;
 		$section->identity = new Identity(1);
-		$section->identity->validated = FALSE;
+		$section->identity->validated = false;
 
 		$firewall = $this->resolver->resolve('admin');
 

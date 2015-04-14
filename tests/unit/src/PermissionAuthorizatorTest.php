@@ -58,13 +58,13 @@ class PermissionAuthorizatorTest extends Test
 			->shouldReceive('isAllowed')
 			->once()
 			->with('role1', 'resource', 'privilege')
-			->andReturn(FALSE);
+			->andReturn(false);
 
 		$this->permission
 			->shouldReceive('isAllowed')
 			->once()
 			->with('role2', 'resource', 'privilege')
-			->andReturn(TRUE);
+			->andReturn(true);
 
 		$this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
 	}
@@ -74,18 +74,18 @@ class PermissionAuthorizatorTest extends Test
 		$this->firewall
 			->shouldReceive('getIdentity')
 			->once()
-			->andReturn(NULL);
+			->andReturn(null);
 
 		$this->permission
 			->shouldReceive('setIdentity')
 			->once()
-			->with(NULL);
+			->with(null);
 
 		$this->permission
 			->shouldReceive('isAllowed')
 			->once()
 			->with('my_guest', 'resource', 'privilege')
-			->andReturn(FALSE);
+			->andReturn(false);
 
 		$this->authorizator->guestRole = 'my_guest';
 

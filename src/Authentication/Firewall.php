@@ -34,7 +34,7 @@ class Firewall extends Object implements FirewallInterface
 	public function login(IIdentity $identity)
 	{
 		$this->storage->setIdentity($identity);
-		$this->storage->setAuthenticated(TRUE);
+		$this->storage->setAuthenticated(true);
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Firewall extends Object implements FirewallInterface
 	 */
 	public function logout()
 	{
-		$this->storage->setAuthenticated(FALSE);
+		$this->storage->setAuthenticated(false);
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Firewall extends Object implements FirewallInterface
 	 */
 	public function getIdentity()
 	{
-		return $this->storage->isAuthenticated() ? $this->storage->getIdentity() : NULL;
+		return $this->storage->isAuthenticated() ? $this->storage->getIdentity() : null;
 	}
 
 	/**
@@ -73,7 +73,7 @@ class Firewall extends Object implements FirewallInterface
 	 * @param string|int|\DateTime $time
 	 * @param bool $browserClosed
 	 */
-	public function setExpiration($time, $browserClosed = TRUE)
+	public function setExpiration($time, $browserClosed = true)
 	{
 		$this->storage->setExpiration($time, $browserClosed ? IUserStorage::BROWSER_CLOSED : 0);
 	}

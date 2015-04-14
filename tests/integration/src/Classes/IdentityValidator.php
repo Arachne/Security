@@ -14,7 +14,7 @@ class IdentityValidator extends Object implements IdentityValidatorInterface
 
 	public function validateIdentity(IIdentity $identity)
 	{
-		$identity->validated = TRUE;
+		$identity->validated = true;
 		return $identity;
 	}
 

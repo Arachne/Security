@@ -36,7 +36,7 @@ class UserStorageTest extends Test
 		$this->session
 			->shouldReceive('exists')
 			->once()
-			->andReturn(TRUE);
+			->andReturn(true);
 		$this->session
 			->shouldReceive('getSection')
 			->twice()
@@ -53,7 +53,7 @@ class UserStorageTest extends Test
 
 		$section = $this->session->getSection('Nette.Http.UserStorage/test');
 		$section->identity = $identity;
-		$section->authenticated = TRUE;
+		$section->authenticated = true;
 
 		$this->identityValidator
 			->shouldReceive('validateIdentity')
@@ -72,7 +72,7 @@ class UserStorageTest extends Test
 
 		$section = $this->session->getSection('Nette.Http.UserStorage/test');
 		$section->identity = $identity;
-		$section->authenticated = TRUE;
+		$section->authenticated = true;
 
 		$this->identityValidator
 			->shouldReceive('validateIdentity')

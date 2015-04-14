@@ -32,7 +32,7 @@ class UserStorage extends BaseUserStorage
 	 * @param Session $session
 	 * @param IdentityValidatorInterface $identityValidator
 	 */
-	public function __construct($namespace, Session $session, IdentityValidatorInterface $identityValidator = NULL)
+	public function __construct($namespace, Session $session, IdentityValidatorInterface $identityValidator = null)
 	{
 		parent::__construct($session);
 		$this->setNamespace($namespace);
@@ -55,7 +55,7 @@ class UserStorage extends BaseUserStorage
 					$section->identity = $identity;
 
 				} else {
-					$section->authenticated = FALSE;
+					$section->authenticated = false;
 					$section->reason = FirewallInterface::LOGOUT_INVALID_IDENTITY;
 					if ($section->expireIdentity) {
 						unset($section->identity);

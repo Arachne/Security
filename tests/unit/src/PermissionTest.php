@@ -41,7 +41,7 @@ class PermissionTest extends Test
 		$mock->shouldReceive('assert')
 			->once()
 			->with($identity, $resource, $role)
-			->andReturn(TRUE);
+			->andReturn(true);
 
 		$this->permission->addResource('resource');
 		$this->permission->addRole('role');
@@ -72,7 +72,7 @@ class PermissionTest extends Test
 		$mock->shouldReceive('assert')
 			->once()
 			->with($identity, $resource, $role)
-			->andReturn(TRUE);
+			->andReturn(true);
 
 		$this->permission->addResource('resource');
 		$this->permission->addRole('role');

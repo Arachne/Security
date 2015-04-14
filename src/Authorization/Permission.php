@@ -26,7 +26,7 @@ class Permission extends BasePermission
 	/**
 	 * @param IIdentity $identity
 	 */
-	public function setIdentity(IIdentity $identity = NULL)
+	public function setIdentity(IIdentity $identity = null)
 	{
 		$this->identity = $identity;
 	}
@@ -41,9 +41,9 @@ class Permission extends BasePermission
 	 * @param callable $assertion
 	 * @return self
 	 */
-	public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = NULL)
+	public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null)
 	{
-		if ($assertion !== NULL) {
+		if ($assertion !== null) {
 			$assertion = function () use ($assertion) {
 				return Callback::invoke($assertion, $this->identity, $this->getQueriedResource(), $this->getQueriedRole());
 			};
@@ -61,9 +61,9 @@ class Permission extends BasePermission
 	 * @param callable $assertion
 	 * @return self
 	 */
-	public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = NULL)
+	public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null)
 	{
-		if ($assertion !== NULL) {
+		if ($assertion !== null) {
 			$assertion = function () use ($assertion) {
 				return Callback::invoke($assertion, $this->identity, $this->getQueriedResource(), $this->getQueriedRole());
 			};

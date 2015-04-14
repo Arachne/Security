@@ -52,10 +52,10 @@ class PermissionAuthorizator extends Object implements AuthorizatorInterface
 
 		foreach ($roles as $role) {
 			if ($this->permission->isAllowed($role, $resource, $privilege)) {
-				return TRUE;
+				return true;
 			}
 		}
-		return FALSE;
+		return false;
 	}
 
 }
