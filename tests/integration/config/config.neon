@@ -22,18 +22,7 @@ nette_2.2 < common:
 	extensions:
 		nette: Nette\Bridges\Framework\NetteExtension
 
-	nette:
-		application:
-			mapping:
-				*: Tests\Integration\Classes\*Presenter
-
 nette_2.3 < common:
 	extensions:
-		nette.application: Nette\Bridges\ApplicationDI\ApplicationExtension( %debugMode%, [ %appDir% ] )
 		nette.http: Nette\Bridges\HttpDI\HttpExtension
-		nette.routing: Nette\Bridges\ApplicationDI\RoutingExtension( %debugMode% )
 		nette.session: Nette\Bridges\HttpDI\SessionExtension
-
-	nette.application:
-		mapping:
-			*: Tests\Integration\Classes\*Presenter

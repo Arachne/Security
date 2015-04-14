@@ -4,6 +4,7 @@ namespace Tests\Integration;
 
 use Arachne\DIHelpers\ResolverInterface;
 use Arachne\Security\Authorization\AuthorizatorInterface;
+use Codeception\TestCase\Test;
 use Nette\DI\Container;
 
 /**
