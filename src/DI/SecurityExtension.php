@@ -31,32 +31,21 @@ class SecurityExtension extends CompilerExtension
 
 	public function loadConfiguration()
 	{
-		$builder = $this->getContainerBuilder();
 		$config = $this->getConfig($this->defaults);
 
 		Validators::assertField($config, 'firewalls', 'array');
 
+		foreach ($this->compiler->getExtensions('Arachne\Security\DI\FirewallProviderInterface') as $extension) {
+			$firewalls = $extension->getFirewalls();
+			Validators::assert($firewalls, 'array');
+			$config['firewalls'] = array_merge($config['firewalls'], $firewalls);
+		}
+
 		foreach ($config['firewalls'] as $firewall => $class) {
 			if (!is_string($firewall)) {
-				$firewall = $class;
-				$class = 'Arachne\Security\Authentication\Firewall';
-			}
-
-			$service = $builder->addDefinition($this->prefix('firewall.' . $firewall))
-				->setClass($class)
-				->addTag(self::TAG_FIREWALL, $firewall);
-
-			if ($class === 'Arachne\Security\Authentication\Firewall' || is_subclass_of($class, 'Arachne\Security\Authentication\Firewall')) {
-				$builder->addDefinition($this->prefix('storage.' . $firewall))
-					->setClass('Arachne\Security\Authentication\UserStorage')
-					->setArguments([
-						'namespace' => $firewall,
-					])
-					->setAutowired(false);
-
-				$service->setArguments([
-					'storage' => $this->prefix('@storage.' . $firewall),
-				]);
+				$this->addFirewall($class);
+			} else {
+				$this->addFirewall($firewall, $class);
 			}
 		}
 
@@ -79,6 +68,28 @@ class SecurityExtension extends CompilerExtension
 			} else {
 				throw new AssertionException("Identity validator '$name' of firewall '$firewall' could not be passed to corresponding storage.");
 			}
+		}
+	}
+
+	public function addFirewall($firewall, $class = 'Arachne\Security\Authentication\Firewall')
+	{
+		$builder = $this->getContainerBuilder();
+
+		$service = $builder->addDefinition($this->prefix('firewall.' . $firewall))
+			->setClass($class)
+			->addTag(self::TAG_FIREWALL, $firewall);
+
+		if ($class === 'Arachne\Security\Authentication\Firewall' || is_subclass_of($class, 'Arachne\Security\Authentication\Firewall')) {
+			$builder->addDefinition($this->prefix('storage.' . $firewall))
+				->setClass('Arachne\Security\Authentication\UserStorage')
+				->setArguments([
+					'namespace' => $firewall,
+				])
+				->setAutowired(false);
+
+			$service->setArguments([
+				'storage' => $this->prefix('@storage.' . $firewall),
+			]);
 		}
 	}
 
