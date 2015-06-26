@@ -69,6 +69,33 @@ class PermissionAuthorizatorTest extends Test
 		$this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
 	}
 
+	public function testIdentityWithNoRoles()
+	{
+		$identity = Mockery::mock(IIdentity::class);
+		$identity
+			->shouldReceive('getRoles')
+			->once()
+			->andReturn([]);
+
+		$this->firewall
+			->shouldReceive('getIdentity')
+			->once()
+			->andReturn($identity);
+
+		$this->permission
+			->shouldReceive('setIdentity')
+			->once()
+			->with($identity);
+
+		$this->permission
+			->shouldReceive('isAllowed')
+			->once()
+			->with(null, 'resource', 'privilege')
+			->andReturn(true);
+
+		$this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
+	}
+
 	public function testGuestRole()
 	{
 		$this->firewall
@@ -85,6 +112,12 @@ class PermissionAuthorizatorTest extends Test
 			->shouldReceive('isAllowed')
 			->once()
 			->with('my_guest', 'resource', 'privilege')
+			->andReturn(false);
+
+		$this->permission
+			->shouldReceive('isAllowed')
+			->once()
+			->with(null, 'resource', 'privilege')
 			->andReturn(false);
 
 		$this->authorizator->guestRole = 'my_guest';

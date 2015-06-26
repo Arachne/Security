@@ -49,6 +49,7 @@ class PermissionAuthorizator extends Object implements AuthorizatorInterface
 		$identity = $this->firewall->getIdentity();
 		$this->permission->setIdentity($identity);
 		$roles = $identity ? $identity->getRoles() : [ $this->guestRole ];
+		$roles[] = null;
 
 		foreach ($roles as $role) {
 			if ($this->permission->isAllowed($role, $resource, $privilege)) {
