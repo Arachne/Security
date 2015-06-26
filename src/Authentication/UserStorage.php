@@ -60,8 +60,7 @@ class UserStorage extends BaseUserStorage
 					if ($section->expireIdentity) {
 						unset($section->identity);
 					}
-					unset($section->expireTime, $section->expireDelta, $section->expireIdentity,
-						$section->expireBrowser, $section->browserCheck, $section->authTime);
+					unset($section->expireTime, $section->expireDelta, $section->expireIdentity, $section->expireBrowser, $section->browserCheck, $section->authTime);
 				}
 			}
 
