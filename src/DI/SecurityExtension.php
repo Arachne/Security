@@ -31,17 +31,16 @@ class SecurityExtension extends CompilerExtension
 
 	public function loadConfiguration()
 	{
-		$config = $this->getConfig($this->defaults);
-
-		Validators::assertField($config, 'firewalls', 'array');
+		$this->validateConfig($this->defaults);
+		Validators::assertField($this->config, 'firewalls', 'array');
 
 		foreach ($this->compiler->getExtensions('Arachne\Security\DI\FirewallProviderInterface') as $extension) {
 			$firewalls = $extension->getFirewalls();
 			Validators::assert($firewalls, 'array');
-			$config['firewalls'] = array_merge($config['firewalls'], $firewalls);
+			$this->config['firewalls'] = array_merge($this->config['firewalls'], $firewalls);
 		}
 
-		foreach ($config['firewalls'] as $firewall => $class) {
+		foreach ($this->config['firewalls'] as $firewall => $class) {
 			if (!is_string($firewall)) {
 				$this->addFirewall($class);
 			} else {
