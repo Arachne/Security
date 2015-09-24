@@ -1,6 +1,6 @@
 common:
 	extensions:
-		arachne.dihelpers: Arachne\DIHelpers\DI\DIHelpersExtension
+		arachne.dihelpers.resolvers: Arachne\DIHelpers\DI\ResolversExtension
 		arachne.security: Arachne\Security\DI\SecurityExtension
 		kdyby.fakesession: Kdyby\FakeSession\DI\FakeSessionExtension
 

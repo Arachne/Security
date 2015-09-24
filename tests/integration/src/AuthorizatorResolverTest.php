@@ -18,7 +18,7 @@ class AuthorizatorResolverTest extends Test
 
 	public function _before()
 	{
-		$this->resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolver.arachne.security.authorizator');
+		$this->resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.authorizator');
 	}
 
 	public function testIdentityValidator()

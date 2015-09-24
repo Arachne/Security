@@ -48,9 +48,15 @@ class SecurityExtension extends CompilerExtension
 			}
 		}
 
-		$extension = $this->getExtension('Arachne\DIHelpers\DI\DIHelpersExtension');
-		$extension->addResolver(self::TAG_FIREWALL, 'Arachne\Security\Authentication\FirewallInterface');
-		$extension->addResolver(self::TAG_AUTHORIZATOR, 'Arachne\Security\Authorization\AuthorizatorInterface');
+		if ($extension = $this->getExtension('Arachne\DIHelpers\DI\ResolversExtension', false)) {
+			$extension->add(self::TAG_FIREWALL, 'Arachne\Security\Authentication\FirewallInterface');
+			$extension->add(self::TAG_AUTHORIZATOR, 'Arachne\Security\Authorization\AuthorizatorInterface');
+		} elseif ($extension = $this->getExtension('Arachne\DIHelpers\DI\DIHelpersExtension', false)) {
+			$extension->addResolver(self::TAG_FIREWALL, 'Arachne\Security\Authentication\FirewallInterface');
+			$extension->addResolver(self::TAG_AUTHORIZATOR, 'Arachne\Security\Authorization\AuthorizatorInterface');
+		} else {
+			throw new AssertionException('Cannot add resolvers because arachne/di-helpers is not properly installed.');
+		}
 	}
 
 	public function beforeCompile()

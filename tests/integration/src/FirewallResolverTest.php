@@ -20,7 +20,7 @@ class FirewallResolverTest extends Test
 
 	public function _before()
 	{
-		$this->resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolver.arachne.security.firewall');
+		$this->resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.firewall');
 	}
 
 	public function testIdentityValidator()
