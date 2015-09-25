@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Arachne\Security\Authorization\Permission;
-use Codeception\TestCase\Test;
+use Codeception\MockeryModule\Test;
 use Mockery;
 use Nette\Security\IIdentity;
 use Nette\Security\IResource;

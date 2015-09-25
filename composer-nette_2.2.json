@@ -9,10 +9,10 @@
 	},
 	"require-dev": {
 		"php": ">=5.5.0",
-		"arachne/codeception": "~0.5.3",
+		"arachne/codeception": "~0.6.3",
 		"arachne/coding-style": "~0.3.0",
-		"codeception/codeception": "~2.0",
-		"codeception/mockery-module": "~0.2",
+		"codeception/codeception": "~2.1.0",
+		"codeception/mockery-module": "~0.2.2",
 		"kdyby/fake-session": "~2.0",
 		"mockery/mockery": "~0.9",
 		"nette/nette": "~2.2.0",

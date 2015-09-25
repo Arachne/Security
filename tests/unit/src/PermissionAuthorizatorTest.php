@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Arachne\Security\Authentication\FirewallInterface;
 use Arachne\Security\Authorization\Permission;
 use Arachne\Security\Authorization\PermissionAuthorizator;
-use Codeception\TestCase\Test;
+use Codeception\MockeryModule\Test;
 use Mockery;
 use Mockery\MockInterface;
 use Nette\Security\IIdentity;

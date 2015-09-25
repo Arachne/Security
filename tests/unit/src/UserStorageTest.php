@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Arachne\Security\Authentication\FirewallInterface;
 use Arachne\Security\Authentication\IdentityValidatorInterface;
 use Arachne\Security\Authentication\UserStorage;
-use Codeception\TestCase\Test;
+use Codeception\MockeryModule\Test;
 use Kdyby\FakeSession\SessionSection;
 use Mockery;
 use Mockery\MockInterface;
