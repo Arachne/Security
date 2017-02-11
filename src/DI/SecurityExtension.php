@@ -94,8 +94,9 @@ class SecurityExtension extends CompilerExtension
     /**
      * @param string $class
      *
-     * @return CompilerExtension
      * @throws AssertionException
+     *
+     * @return CompilerExtension
      */
     private function getExtension($class)
     {

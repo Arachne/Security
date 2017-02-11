@@ -2,15 +2,14 @@
 
 namespace Tests\Integration;
 
-use Arachne\DIHelpers\ResolverInterface;
 use Arachne\Security\Authorization\AuthorizatorInterface;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Nette\DI\Container;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class AuthorizatorResolverTest extends Test
+class AuthorizatorResolverTest extends Unit
 {
     protected $tester;
 

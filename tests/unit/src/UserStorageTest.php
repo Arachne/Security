@@ -62,7 +62,9 @@ class UserStorageTest extends Unit
 
         $identity = $identityHandle->get();
 
-        $section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
+        /** @var Session $session */
+        $session = $this->sessionHandle->get();
+        $section = $session->getSection('Nette.Http.UserStorage/test');
         $section->identity = $identity;
         $section->authenticated = true;
 
@@ -83,7 +85,9 @@ class UserStorageTest extends Unit
         $identity = $identityHandle->get();
         $newIdentity = $newIdentityHandle->get();
 
-        $section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
+        /** @var Session $session */
+        $session = $this->sessionHandle->get();
+        $section = $session->getSection('Nette.Http.UserStorage/test');
         $section->identity = $identity;
         $section->authenticated = true;
 
