@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Arachne\Security\Authorization\Permission;
-use Codeception\MockeryModule\Test;
-use Mockery;
+use Codeception\Test\Unit;
+use Eloquent\Phony\Phpunit\Phony;
 use Nette\Security\IIdentity;
 use Nette\Security\IResource;
 use Nette\Security\IRole;
@@ -12,10 +12,12 @@ use Nette\Security\IRole;
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class PermissionTest extends Test
+class PermissionTest extends Unit
 {
 
-	/** @var Permission */
+	/**
+     * @var Permission
+     */
 	private $permission;
 
 	protected function _before()
@@ -25,65 +27,71 @@ class PermissionTest extends Test
 
 	public function testAllow()
 	{
-		$identity = Mockery::mock(IIdentity::class);
+        $identityHandle = Phony::mock(IIdentity::class);
 
-		$resource = Mockery::mock(IResource::class);
-		$resource->shouldReceive('getResourceId')
-			->once()
-			->andReturn('resource');
+		$resourceHandle = Phony::mock(IResource::class);
+        $resourceHandle
+            ->getResourceId
+			->returns('resource');
 
-		$role = Mockery::mock(IRole::class);
-		$role->shouldReceive('getRoleId')
-			->once()
-			->andReturn('role');
+		$roleHandle = Phony::mock(IRole::class);
+        $roleHandle
+            ->getRoleId
+			->returns('role');
 
-		$mock = Mockery::mock();
-		$mock->shouldReceive('assert')
-			->once()
-			->with($identity, $resource, $role)
-			->andReturn(true);
+        $identity = $identityHandle->get();
+        $resource = $resourceHandle->get();
+        $role = $roleHandle->get();
+
+        $assertCallback = Phony::stub();
+        $assertCallback
+			->returns(true);
 
 		$this->permission->addResource('resource');
 		$this->permission->addRole('role');
-		$this->permission->allow('role', 'resource', 'privilege', function (IIdentity $identity, IResource $resource, IRole $role) use ($mock) {
-			return $mock->assert($identity, $resource, $role);
-		});
+		$this->permission->allow('role', 'resource', 'privilege', $assertCallback);
 
 		$this->permission->setIdentity($identity);
 
 		$this->assertTrue($this->permission->isAllowed($role, $resource, 'privilege'));
+
+        $assertCallback
+            ->calledWith($identity, $resource, $role);
 	}
 
 	public function testDeny()
 	{
-		$identity = Mockery::mock(IIdentity::class);
+        $identityHandle = Phony::mock(IIdentity::class);
 
-		$resource = Mockery::mock(IResource::class);
-		$resource->shouldReceive('getResourceId')
-			->once()
-			->andReturn('resource');
+        $resourceHandle = Phony::mock(IResource::class);
+        $resourceHandle
+            ->getResourceId
+			->returns('resource');
 
-		$role = Mockery::mock(IRole::class);
-		$role->shouldReceive('getRoleId')
-			->once()
-			->andReturn('role');
+        $roleHandle = Phony::mock(IRole::class);
+        $roleHandle
+            ->getRoleId
+			->returns('role');
 
-		$mock = Mockery::mock();
-		$mock->shouldReceive('assert')
-			->once()
-			->with($identity, $resource, $role)
-			->andReturn(true);
+        $identity = $identityHandle->get();
+        $resource = $resourceHandle->get();
+        $role = $roleHandle->get();
+
+        $assertCallback = Phony::stub();
+        $assertCallback
+            ->returns(true);
 
 		$this->permission->addResource('resource');
 		$this->permission->addRole('role');
 		$this->permission->allow('role', 'resource');
-		$this->permission->deny('role', 'resource', 'privilege', function (IIdentity $identity, IResource $resource, IRole $role) use ($mock) {
-			return $mock->assert($identity, $resource, $role);
-		});
+		$this->permission->deny('role', 'resource', 'privilege', $assertCallback);
 
 		$this->permission->setIdentity($identity);
 
 		$this->assertFalse($this->permission->isAllowed($role, $resource, 'privilege'));
+
+        $assertCallback
+            ->calledWith($identity, $resource, $role);
 	}
 
 }

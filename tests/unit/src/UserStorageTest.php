@@ -5,82 +5,99 @@ namespace Tests\Unit;
 use Arachne\Security\Authentication\FirewallInterface;
 use Arachne\Security\Authentication\IdentityValidatorInterface;
 use Arachne\Security\Authentication\UserStorage;
-use Codeception\MockeryModule\Test;
-use Kdyby\FakeSession\SessionSection;
-use Mockery;
-use Mockery\MockInterface;
+use Codeception\Test\Unit;
+use Eloquent\Phony\Mock\Handle\InstanceHandle;
+use Eloquent\Phony\Phpunit\Phony;
 use Nette\Http\Session;
+use Nette\Http\SessionSection;
 use Nette\Security\IIdentity;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class UserStorageTest extends Test
+class UserStorageTest extends Unit
 {
 
-	/** @var UserStorage */
+	/**
+     * @var UserStorage
+     */
 	private $userStorage;
 
-	/** @var MockInterface */
-	private $session;
+	/**
+     * @var InstanceHandle
+     */
+	private $sessionHandle;
 
-	/** @var MockInterface */
-	private $identityValidator;
+	/**
+     * @var InstanceHandle
+     */
+	private $identityValidatorHandle;
 
 	protected function _before()
 	{
-		$section = Mockery::mock(SessionSection::class);
-		$section->makePartial();
+		$this->sessionHandle = Phony::mock(Session::class);
+		$this->sessionHandle
+			->exists
+			->returns(true);
 
-		$this->session = Mockery::mock(Session::class);
-		$this->session
-			->shouldReceive('exists')
-			->once()
-			->andReturn(true);
-		$this->session
-			->shouldReceive('getSection')
-			->twice()
+        $section = Phony::partialMock(
+            SessionSection::class,
+            [
+                $this->sessionHandle->get(),
+                'Nette.Http.UserStorage/test'
+            ]
+        );
+
+		$this->sessionHandle
+			->getSection
 			->with('Nette.Http.UserStorage/test')
-			->andReturn($section);
+			->returns($section);
 
-		$this->identityValidator = Mockery::mock(IdentityValidatorInterface::class);
-		$this->userStorage = new UserStorage('test', $this->session, $this->identityValidator);
+		$this->identityValidatorHandle = Phony::mock(IdentityValidatorInterface::class);
+		$this->userStorage = new UserStorage('test', $this->sessionHandle->get(), $this->identityValidatorHandle->get());
 	}
 
 	public function testInvalidIdentity()
 	{
-		$identity = Mockery::mock(IIdentity::class);
+		$identityHandle = Phony::mock(IIdentity::class);
 
-		$section = $this->session->getSection('Nette.Http.UserStorage/test');
+        $identity = $identityHandle->get();
+
+		$section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
 		$section->identity = $identity;
 		$section->authenticated = true;
-
-		$this->identityValidator
-			->shouldReceive('validateIdentity')
-			->with($identity)
-			->andReturn();
 
 		$this->assertFalse($this->userStorage->isAuthenticated());
 		$this->assertSame($identity, $this->userStorage->getIdentity());
 		$this->assertSame(FirewallInterface::LOGOUT_INVALID_IDENTITY, $this->userStorage->getLogoutReason());
-	}
+
+        $this->identityValidatorHandle
+            ->validateIdentity
+            ->calledWith($identity);
+    }
 
 	public function testNewIdentity()
 	{
-		$identity = Mockery::mock(IIdentity::class);
-		$newIdentity = Mockery::mock(IIdentity::class);
+        $identityHandle = Phony::mock(IIdentity::class);
+        $newIdentityHandle = Phony::mock(IIdentity::class);
 
-		$section = $this->session->getSection('Nette.Http.UserStorage/test');
+        $identity = $identityHandle->get();
+        $newIdentity = $newIdentityHandle->get();
+
+		$section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
 		$section->identity = $identity;
 		$section->authenticated = true;
 
-		$this->identityValidator
-			->shouldReceive('validateIdentity')
-			->with($identity)
-			->andReturn($newIdentity);
+		$this->identityValidatorHandle
+			->validateIdentity
+			->returns($newIdentity);
 
 		$this->assertTrue($this->userStorage->isAuthenticated());
 		$this->assertSame($newIdentity, $this->userStorage->getIdentity());
+
+        $this->identityValidatorHandle
+            ->validateIdentity
+            ->calledWith($identity);
 	}
 
 }

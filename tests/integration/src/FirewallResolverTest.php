@@ -14,19 +14,21 @@ use Nette\Security\Identity;
  */
 class FirewallResolverTest extends Test
 {
+    protected $tester;
 
-	/** @var ResolverInterface */
+	/**
+     * @var ResolverInterface
+     */
 	private $resolver;
 
 	public function _before()
 	{
-		$this->resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.firewall');
+		$this->resolver = $this->tester->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.firewall');
 	}
 
 	public function testIdentityValidator()
 	{
-		$session = $this->guy->grabService(Session::class);
-		$session->setFakeExists(true);
+		$session = $this->tester->grabService(Session::class);
 
 		$section = $session->getSection('Nette.Http.UserStorage/admin');
 		$section->authenticated = true;

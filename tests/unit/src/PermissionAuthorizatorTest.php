@@ -5,124 +5,122 @@ namespace Tests\Unit;
 use Arachne\Security\Authentication\FirewallInterface;
 use Arachne\Security\Authorization\Permission;
 use Arachne\Security\Authorization\PermissionAuthorizator;
-use Codeception\MockeryModule\Test;
-use Mockery;
-use Mockery\MockInterface;
+use Codeception\Test\Unit;
 use Nette\Security\IIdentity;
+use Eloquent\Phony\Mock\Handle\InstanceHandle;
+use Eloquent\Phony\Phpunit\Phony;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class PermissionAuthorizatorTest extends Test
+class PermissionAuthorizatorTest extends Unit
 {
 
-	/** @var MockInterface */
-	private $firewall;
+	/**
+     * @var InstanceHandle
+     */
+	private $firewallHandle;
 
-	/** @var MockInterface */
-	private $permission;
+	/**
+     * @var InstanceHandle
+     */
+	private $permissionHandle;
 
-	/** @var PermissionAuthorizator */
+	/**
+     * @var PermissionAuthorizator
+     */
 	private $authorizator;
 
 	protected function _before()
 	{
-		$this->firewall = Mockery::mock(FirewallInterface::class);
-		$this->permission = Mockery::mock(Permission::class);
-		$this->authorizator = new PermissionAuthorizator($this->firewall, $this->permission);
+		$this->firewallHandle = Phony::mock(FirewallInterface::class);
+		$this->permissionHandle = Phony::mock(Permission::class);
+		$this->authorizator = new PermissionAuthorizator($this->firewallHandle->get(), $this->permissionHandle->get());
 	}
 
 	public function testRoles()
 	{
-		$identity = Mockery::mock(IIdentity::class);
-		$identity
-			->shouldReceive('getRoles')
-			->once()
-			->andReturn([
-				'role1',
-				'role2',
-				'role3',
-			]);
+		$identityHandle = Phony::mock(IIdentity::class);
+		$identityHandle
+			->getRoles
+			->returns(
+			    [
+                    'role1',
+                    'role2',
+                    'role3',
+			    ]
+            );
 
-		$this->firewall
-			->shouldReceive('getIdentity')
-			->once()
-			->andReturn($identity);
+        $identity = $identityHandle->get();
 
-		$this->permission
-			->shouldReceive('setIdentity')
-			->once()
-			->with($identity);
+		$this->firewallHandle->getIdentity->returns($identityHandle);
 
-		$this->permission
-			->shouldReceive('isAllowed')
-			->once()
+		$this->permissionHandle
+			->isAllowed
 			->with('role1', 'resource', 'privilege')
-			->andReturn(false);
+			->returns(false);
 
-		$this->permission
-			->shouldReceive('isAllowed')
-			->once()
+		$this->permissionHandle
+			->isAllowed
 			->with('role2', 'resource', 'privilege')
-			->andReturn(true);
+			->returns(true);
 
 		$this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
+
+        $this->permissionHandle
+            ->setIdentity
+            ->calledWith($identity);
 	}
 
 	public function testIdentityWithNoRoles()
 	{
-		$identity = Mockery::mock(IIdentity::class);
-		$identity
-			->shouldReceive('getRoles')
-			->once()
-			->andReturn([]);
+        $identityHandle = Phony::mock(IIdentity::class);
+        $identityHandle
+			->getRoles
+			->returns([]);
 
-		$this->firewall
-			->shouldReceive('getIdentity')
-			->once()
-			->andReturn($identity);
+        $identity = $identityHandle->get();
 
-		$this->permission
-			->shouldReceive('setIdentity')
-			->once()
-			->with($identity);
+		$this->firewallHandle
+			->getIdentity
+			->returns($identity);
 
-		$this->permission
-			->shouldReceive('isAllowed')
-			->once()
+		$this->permissionHandle
+			->isAllowed
 			->with(null, 'resource', 'privilege')
-			->andReturn(true);
+			->returns(true);
 
 		$this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
+
+        $this->permissionHandle
+            ->setIdentity
+            ->calledWith($identity);
 	}
 
 	public function testGuestRole()
 	{
-		$this->firewall
-			->shouldReceive('getIdentity')
-			->once()
-			->andReturn(null);
+		$this->firewallHandle
+			->getIdentity
+			->returns(null);
 
-		$this->permission
-			->shouldReceive('setIdentity')
-			->once()
-			->with(null);
-
-		$this->permission
-			->shouldReceive('isAllowed')
-			->once()
+		$this->permissionHandle
+			->isAllowed
 			->with('my_guest', 'resource', 'privilege')
-			->andReturn(false);
+			->returns(false);
 
-		$this->permission
-			->shouldReceive('isAllowed')
+		$this->permissionHandle
+			->isAllowed
 			->once()
 			->with(null, 'resource', 'privilege')
-			->andReturn(false);
+			->returns(false);
 
 		$this->authorizator->guestRole = 'my_guest';
 
 		$this->assertFalse($this->authorizator->isAllowed('resource', 'privilege'));
+
+        $this->permissionHandle
+            ->setIdentity
+            ->calledWith(null);
 	}
 
 }

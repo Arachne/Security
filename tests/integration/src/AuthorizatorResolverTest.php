@@ -12,13 +12,16 @@ use Nette\DI\Container;
  */
 class AuthorizatorResolverTest extends Test
 {
+    protected $tester;
 
-	/** @var ResolverInterface */
+	/**
+     * @var ResolverInterface
+     */
 	private $resolver;
 
 	public function _before()
 	{
-		$this->resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.authorizator');
+		$this->resolver = $this->tester->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.authorizator');
 	}
 
 	public function testIdentityValidator()
