@@ -17,13 +17,13 @@ class FirewallResolverTest extends Test
     protected $tester;
 
     /**
-     * @var ResolverInterface
+     * @var callable
      */
     private $resolver;
 
     public function _before()
     {
-        $this->resolver = $this->tester->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.firewall');
+        $this->resolver = $this->tester->grabService(Container::class)->getService('arachne.servicecollections.1.arachne.security.firewall');
     }
 
     public function testIdentityValidator()
@@ -35,7 +35,7 @@ class FirewallResolverTest extends Test
         $section->identity = new Identity(1);
         $section->identity->validated = false;
 
-        $firewall = $this->resolver->resolve('admin');
+        $firewall = ($this->resolver)('admin');
 
         $this->assertInstanceOf(Firewall::class, $firewall);
         $this->assertTrue($firewall->getIdentity()->validated);

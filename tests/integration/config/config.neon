@@ -1,7 +1,7 @@
 extensions:
     nette.http: Nette\Bridges\HttpDI\HttpExtension
     nette.session: Nette\Bridges\HttpDI\SessionExtension
-    arachne.dihelpers.resolvers: Arachne\DIHelpers\DI\ResolversExtension
+    arachne.servicecollections: Arachne\ServiceCollections\DI\ServiceCollectionsExtension
     arachne.security: Arachne\Security\DI\SecurityExtension
 
 arachne.security:
