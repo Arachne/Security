@@ -17,87 +17,85 @@ use Nette\Security\IIdentity;
  */
 class UserStorageTest extends Unit
 {
-
-	/**
+    /**
      * @var UserStorage
      */
-	private $userStorage;
+    private $userStorage;
 
-	/**
+    /**
      * @var InstanceHandle
      */
-	private $sessionHandle;
+    private $sessionHandle;
 
-	/**
+    /**
      * @var InstanceHandle
      */
-	private $identityValidatorHandle;
+    private $identityValidatorHandle;
 
-	protected function _before()
-	{
-		$this->sessionHandle = Phony::mock(Session::class);
-		$this->sessionHandle
-			->exists
-			->returns(true);
+    protected function _before()
+    {
+        $this->sessionHandle = Phony::mock(Session::class);
+        $this->sessionHandle
+            ->exists
+            ->returns(true);
 
         $section = Phony::partialMock(
             SessionSection::class,
             [
                 $this->sessionHandle->get(),
-                'Nette.Http.UserStorage/test'
+                'Nette.Http.UserStorage/test',
             ]
         );
 
-		$this->sessionHandle
-			->getSection
-			->with('Nette.Http.UserStorage/test')
-			->returns($section);
+        $this->sessionHandle
+            ->getSection
+            ->with('Nette.Http.UserStorage/test')
+            ->returns($section);
 
-		$this->identityValidatorHandle = Phony::mock(IdentityValidatorInterface::class);
-		$this->userStorage = new UserStorage('test', $this->sessionHandle->get(), $this->identityValidatorHandle->get());
-	}
+        $this->identityValidatorHandle = Phony::mock(IdentityValidatorInterface::class);
+        $this->userStorage = new UserStorage('test', $this->sessionHandle->get(), $this->identityValidatorHandle->get());
+    }
 
-	public function testInvalidIdentity()
-	{
-		$identityHandle = Phony::mock(IIdentity::class);
+    public function testInvalidIdentity()
+    {
+        $identityHandle = Phony::mock(IIdentity::class);
 
         $identity = $identityHandle->get();
 
-		$section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
-		$section->identity = $identity;
-		$section->authenticated = true;
+        $section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
+        $section->identity = $identity;
+        $section->authenticated = true;
 
-		$this->assertFalse($this->userStorage->isAuthenticated());
-		$this->assertSame($identity, $this->userStorage->getIdentity());
-		$this->assertSame(FirewallInterface::LOGOUT_INVALID_IDENTITY, $this->userStorage->getLogoutReason());
+        $this->assertFalse($this->userStorage->isAuthenticated());
+        $this->assertSame($identity, $this->userStorage->getIdentity());
+        $this->assertSame(FirewallInterface::LOGOUT_INVALID_IDENTITY, $this->userStorage->getLogoutReason());
 
         $this->identityValidatorHandle
             ->validateIdentity
             ->calledWith($identity);
     }
 
-	public function testNewIdentity()
-	{
+    public function testNewIdentity()
+    {
         $identityHandle = Phony::mock(IIdentity::class);
         $newIdentityHandle = Phony::mock(IIdentity::class);
 
         $identity = $identityHandle->get();
         $newIdentity = $newIdentityHandle->get();
 
-		$section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
-		$section->identity = $identity;
-		$section->authenticated = true;
+        $section = $this->sessionHandle->get()->getSection('Nette.Http.UserStorage/test');
+        $section->identity = $identity;
+        $section->authenticated = true;
 
-		$this->identityValidatorHandle
-			->validateIdentity
-			->returns($newIdentity);
+        $this->identityValidatorHandle
+            ->validateIdentity
+            ->returns($newIdentity);
 
-		$this->assertTrue($this->userStorage->isAuthenticated());
-		$this->assertSame($newIdentity, $this->userStorage->getIdentity());
+        $this->assertTrue($this->userStorage->isAuthenticated());
+        $this->assertSame($newIdentity, $this->userStorage->getIdentity());
 
         $this->identityValidatorHandle
             ->validateIdentity
             ->calledWith($identity);
-	}
-
+    }
 }

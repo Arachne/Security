@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Arachne
+ * This file is part of the Arachne.
  *
  * Copyright (c) Jáchym Toušek (enumag@gmail.com)
  *
@@ -17,12 +17,11 @@ use Nette\Security\IResource;
  */
 interface AuthorizatorInterface
 {
-
-	/**
-	 * @param string|IResource $resource
-	 * @param string $privilege
-	 * @return bool
-	 */
-	public function isAllowed($resource, $privilege);
-
+    /**
+     * @param string|IResource $resource
+     * @param string           $privilege
+     *
+     * @return bool
+     */
+    public function isAllowed($resource, $privilege);
 }

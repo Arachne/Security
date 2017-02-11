@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Arachne
+ * This file is part of the Arachne.
  *
  * Copyright (c) Jáchym Toušek (enumag@gmail.com)
  *
@@ -19,63 +19,58 @@ use Nette\Security\IUserStorage;
  */
 class Firewall extends Object implements FirewallInterface
 {
+    /** @var IUserStorage */
+    private $storage;
 
-	/** @var IUserStorage */
-	private $storage;
+    public function __construct(IUserStorage $storage)
+    {
+        $this->storage = $storage;
+    }
 
-	public function __construct(IUserStorage $storage)
-	{
-		$this->storage = $storage;
-	}
+    /**
+     * @param IIdentity $identity
+     */
+    public function login(IIdentity $identity)
+    {
+        $this->storage->setIdentity($identity);
+        $this->storage->setAuthenticated(true);
+    }
 
-	/**
-	 * @param IIdentity $identity
-	 */
-	public function login(IIdentity $identity)
-	{
-		$this->storage->setIdentity($identity);
-		$this->storage->setAuthenticated(true);
-	}
+    public function logout()
+    {
+        $this->storage->setAuthenticated(false);
+    }
 
-	/**
-	 * @return void
-	 */
-	public function logout()
-	{
-		$this->storage->setAuthenticated(false);
-	}
+    /**
+     * @return IIdentity
+     */
+    public function getIdentity()
+    {
+        return $this->storage->isAuthenticated() ? $this->storage->getIdentity() : null;
+    }
 
-	/**
-	 * @return IIdentity
-	 */
-	public function getIdentity()
-	{
-		return $this->storage->isAuthenticated() ? $this->storage->getIdentity() : null;
-	}
+    /**
+     * @return IIdentity
+     */
+    public function getExpiredIdentity()
+    {
+        return $this->storage->getIdentity();
+    }
 
-	/**
-	 * @return IIdentity
-	 */
-	public function getExpiredIdentity()
-	{
-		return $this->storage->getIdentity();
-	}
+    /**
+     * @return int
+     */
+    public function getLogoutReason()
+    {
+        return $this->storage->getLogoutReason();
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getLogoutReason()
-	{
-		return $this->storage->getLogoutReason();
-	}
-
-	/**
-	 * @param string|int|\DateTime $time
-	 * @param bool $browserClosed
-	 */
-	public function setExpiration($time, $browserClosed = true)
-	{
-		$this->storage->setExpiration($time, $browserClosed ? IUserStorage::BROWSER_CLOSED : 0);
-	}
-
+    /**
+     * @param string|int|\DateTime $time
+     * @param bool                 $browserClosed
+     */
+    public function setExpiration($time, $browserClosed = true)
+    {
+        $this->storage->setExpiration($time, $browserClosed ? IUserStorage::BROWSER_CLOSED : 0);
+    }
 }

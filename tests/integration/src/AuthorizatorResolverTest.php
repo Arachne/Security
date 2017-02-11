@@ -14,19 +14,18 @@ class AuthorizatorResolverTest extends Test
 {
     protected $tester;
 
-	/**
+    /**
      * @var ResolverInterface
      */
-	private $resolver;
+    private $resolver;
 
-	public function _before()
-	{
-		$this->resolver = $this->tester->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.authorizator');
-	}
+    public function _before()
+    {
+        $this->resolver = $this->tester->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.arachne.security.authorizator');
+    }
 
-	public function testIdentityValidator()
-	{
-		$this->assertInstanceOf(AuthorizatorInterface::class, $this->resolver->resolve('admin'));
-	}
-
+    public function testIdentityValidator()
+    {
+        $this->assertInstanceOf(AuthorizatorInterface::class, $this->resolver->resolve('admin'));
+    }
 }

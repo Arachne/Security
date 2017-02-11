@@ -10,9 +10,7 @@ use Nette\Object;
  */
 class Authorizator extends Object implements AuthorizatorInterface
 {
-
-	public function isAllowed($resource, $privilege)
-	{
-	}
-
+    public function isAllowed($resource, $privilege)
+    {
+    }
 }

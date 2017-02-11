@@ -11,11 +11,10 @@ use Nette\Security\IIdentity;
  */
 class IdentityValidator extends Object implements IdentityValidatorInterface
 {
+    public function validateIdentity(IIdentity $identity)
+    {
+        $identity->validated = true;
 
-	public function validateIdentity(IIdentity $identity)
-	{
-		$identity->validated = true;
-		return $identity;
-	}
-
+        return $identity;
+    }
 }

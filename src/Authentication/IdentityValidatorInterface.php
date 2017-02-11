@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Arachne
+ * This file is part of the Arachne.
  *
  * Copyright (c) Jáchym Toušek (enumag@gmail.com)
  *
@@ -17,10 +17,8 @@ use Nette\Security\IIdentity;
  */
 interface IdentityValidatorInterface
 {
-
-	/**
-	 * @return IIdentity
-	 */
-	public function validateIdentity(IIdentity $identity);
-
+    /**
+     * @return IIdentity
+     */
+    public function validateIdentity(IIdentity $identity);
 }
