@@ -34,7 +34,7 @@ class FirewallResolverTest extends Unit
         $section->identity = new Identity(1);
         $section->identity->validated = false;
 
-        $firewall = ($this->resolver)('admin');
+        $firewall = call_user_func($this->resolver, 'admin');
 
         $this->assertInstanceOf(Firewall::class, $firewall);
         $this->assertTrue($firewall->getIdentity()->validated);
