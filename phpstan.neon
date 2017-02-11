@@ -1,0 +1,3 @@
+parameters:
+    ignoreErrors:
+        - '#^Access to an undefined property Eloquent\\Phony\\Mock\\Handle\\InstanceHandle::\$[a-zA-Z]+#'

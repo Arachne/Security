@@ -1,46 +1,51 @@
 {
-	"name": "arachne/security",
-	"type": "library",
-	"keywords": [ "nette", "arachne", "security" ],
-	"authors": [
-		{
-			"name": "Jáchym Toušek",
-			"homepage": "http://enumag.cz",
-			"email": "enumag@gmail.com"
-		}
-	],
-	"require": {
-		"php": ">=5.4.0",
-		"arachne/di-helpers": "~0.2.0|~0.3.0|~0.4.0",
-		"nette/di": "~2.2",
-		"nette/http": "~2.2",
-		"nette/security": "~2.2",
-		"nette/utils": "~2.2"
-	},
-	"require-dev": {
-		"php": ">=5.5.0",
-		"arachne/codeception": "~0.6.3",
-		"arachne/coding-style": "~0.3.0",
-		"codeception/codeception": "~2.1.0",
-		"codeception/mockery-module": "~0.2.2",
-		"kdyby/fake-session": "~2.0",
-		"mockery/mockery": "~0.9",
-		"nette/di": "~2.3",
-		"nette/http": "~2.3",
-		"nette/security": "~2.3",
-		"nette/utils": "~2.3",
-		"squizlabs/php_codesniffer": "~2.0",
-		"tracy/tracy": "~2.3"
-	},
-	"autoload": {
-		"psr-4": {
-			"Arachne\\Security\\": "src"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Unit\\": "tests/unit/src",
-			"Tests\\Integration\\": "tests/integration/src"
-		}
-	}
+    "name": "arachne/security",
+    "type": "library",
+    "license": "MIT",
+    "description": "Authentication and authorization for Nette framework. Deals with cases that are difficult to implement with nette/security.",
+    "keywords": [ "nette", "arachne", "security" ],
+    "authors": [
+        {
+            "name": "Jáchym Toušek",
+            "homepage": "http://enumag.cz",
+            "email": "enumag@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.6.0|^7.0.0",
+        "arachne/service-collections": "^0.1.0",
+        "nette/di": "^2.4.0",
+        "nette/http": "^2.4.0",
+        "nette/security": "^2.4.0",
+        "nette/utils": "^2.4.0"
+    },
+    "require-dev": {
+        "arachne/codeception": "^0.7.0",
+        "codeception/codeception": "^2.2.0",
+        "tracy/tracy": "^2.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arachne\\Security\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Unit\\": "tests/unit/src",
+            "Tests\\Integration\\": "tests/integration/src"
+        }
+    },
+    "scripts": {
+        "all": [
+            "@fix",
+            "@analyse",
+            "@test"
+        ],
+        "fix": "php-cs-fixer fix",
+        "analyse": "phpstan analyse --no-progress --level=4 --configuration=phpstan.neon src tests",
+        "test": [
+            "\"vendor/bin/codecept\" build",
+            "\"vendor/bin/codecept\" run"
+        ]
+    }
 }
