@@ -1,9 +1,9 @@
 {
     "name": "arachne/security",
-    "type": "library",
-    "license": "MIT",
     "description": "Authentication and authorization for Nette framework. Deals with cases that are difficult to implement with nette/security.",
+    "type": "library",
     "keywords": [ "nette", "arachne", "security" ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Jáchym Toušek",
