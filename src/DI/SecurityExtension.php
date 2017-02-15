@@ -20,7 +20,9 @@ class SecurityExtension extends CompilerExtension
     const TAG_FIREWALL = 'arachne.security.firewall';
     const TAG_IDENTITY_VALIDATOR = 'arachne.security.identityValidator';
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $defaults = [
         'firewalls' => [],
     ];

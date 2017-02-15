@@ -12,10 +12,14 @@ use Nette\Security\IIdentity;
  */
 class UserStorage extends BaseUserStorage
 {
-    /** @var IdentityValidatorInterface */
+    /**
+     * @var IdentityValidatorInterface
+     */
     private $identityValidator;
 
-    /** @var SessionSection */
+    /**
+     * @var SessionSection
+     */
     private $sessionSection;
 
     /**

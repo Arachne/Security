@@ -11,7 +11,9 @@ use Nette\Utils\Callback;
  */
 class Permission extends BasePermission
 {
-    /** @var IIdentity */
+    /**
+     * @var IIdentity
+     */
     private $identity;
 
     /**
@@ -29,7 +31,7 @@ class Permission extends BasePermission
      * @param string|array|Permission::ALL $roles
      * @param string|array|Permission::ALL $resources
      * @param string|array|Permission::ALL $privileges
-     * @param callable                     $assertion
+     * @param callable|null                $assertion
      *
      * @return self
      */
@@ -51,7 +53,7 @@ class Permission extends BasePermission
      * @param string|array|Permission::ALL $roles
      * @param string|array|Permission::ALL $resources
      * @param string|array|Permission::ALL $privileges
-     * @param callable                     $assertion
+     * @param callable|null                $assertion
      *
      * @return self
      */

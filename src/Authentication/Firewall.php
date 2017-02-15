@@ -11,7 +11,9 @@ use Nette\Security\IUserStorage;
  */
 class Firewall extends Object implements FirewallInterface
 {
-    /** @var IUserStorage */
+    /**
+     * @var IUserStorage
+     */
     private $storage;
 
     public function __construct(IUserStorage $storage)

@@ -11,13 +11,19 @@ use Nette\Security\IResource;
  */
 class PermissionAuthorizator extends Object implements AuthorizatorInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     public $guestRole = 'guest';
 
-    /** @var FirewallInterface */
+    /**
+     * @var FirewallInterface
+     */
     private $firewall;
 
-    /** @var Permission */
+    /**
+     * @var Permission
+     */
     private $permission;
 
     /**
