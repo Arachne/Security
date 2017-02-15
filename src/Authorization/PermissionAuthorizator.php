@@ -10,10 +10,8 @@ use Nette\Security\IResource;
  */
 class PermissionAuthorizator implements AuthorizatorInterface
 {
-    /**
-     * @var string
-     */
-    public $guestRole = 'guest';
+    const AUTHENTICATED_ROLE = '__authenticated';
+    const GUEST_ROLE = '__guest';
 
     /**
      * @var FirewallInterface
@@ -44,8 +42,13 @@ class PermissionAuthorizator implements AuthorizatorInterface
     {
         $identity = $this->firewall->getIdentity();
         $this->permission->setIdentity($identity);
-        $roles = $identity ? $identity->getRoles() : [$this->guestRole];
-        $roles[] = null;
+        if ($identity) {
+            $roles = $identity->getRoles();
+            // Add a role to make sure even identities without any roles will invoke permission.
+            $roles[] = self::AUTHENTICATED_ROLE;
+        } else {
+            $roles = [self::GUEST_ROLE];
+        }
 
         foreach ($roles as $role) {
             if ($this->permission->isAllowed($role, $resource, $privilege)) {

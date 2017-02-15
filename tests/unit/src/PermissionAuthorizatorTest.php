@@ -86,7 +86,7 @@ class PermissionAuthorizatorTest extends Unit
 
         $this->permissionHandle
             ->isAllowed
-            ->with(null, 'resource', 'privilege')
+            ->with(PermissionAuthorizator::AUTHENTICATED_ROLE, 'resource', 'privilege')
             ->returns(true);
 
         $this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
@@ -104,16 +104,8 @@ class PermissionAuthorizatorTest extends Unit
 
         $this->permissionHandle
             ->isAllowed
-            ->with('my_guest', 'resource', 'privilege')
+            ->with(PermissionAuthorizator::GUEST_ROLE, 'resource', 'privilege')
             ->returns(false);
-
-        $this->permissionHandle
-            ->isAllowed
-            ->once()
-            ->with(null, 'resource', 'privilege')
-            ->returns(false);
-
-        $this->authorizator->guestRole = 'my_guest';
 
         $this->assertFalse($this->authorizator->isAllowed('resource', 'privilege'));
 
