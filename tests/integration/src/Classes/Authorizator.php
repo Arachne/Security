@@ -3,12 +3,11 @@
 namespace Tests\Integration\Classes;
 
 use Arachne\Security\Authorization\AuthorizatorInterface;
-use Nette\Object;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Authorizator extends Object implements AuthorizatorInterface
+class Authorizator implements AuthorizatorInterface
 {
     public function isAllowed($resource, $privilege)
     {

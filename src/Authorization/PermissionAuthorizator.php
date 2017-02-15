@@ -3,13 +3,12 @@
 namespace Arachne\Security\Authorization;
 
 use Arachne\Security\Authentication\FirewallInterface;
-use Nette\Object;
 use Nette\Security\IResource;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class PermissionAuthorizator extends Object implements AuthorizatorInterface
+class PermissionAuthorizator implements AuthorizatorInterface
 {
     /**
      * @var string

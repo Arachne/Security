@@ -2,14 +2,13 @@
 
 namespace Arachne\Security\Authentication;
 
-use Nette\Object;
 use Nette\Security\IIdentity;
 use Nette\Security\IUserStorage;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class Firewall extends Object implements FirewallInterface
+class Firewall implements FirewallInterface
 {
     /**
      * @var IUserStorage
