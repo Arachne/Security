@@ -1,5 +1,8 @@
+includes:
+    - vendor-tools/phpstan/phpstan-nette/extension.neon
+    - vendor-tools/phpstan/phpstan-nette/rules.neon
+
 parameters:
     ignoreErrors:
         - '#^Access to an undefined property Eloquent\\Phony\\Mock\\Handle\\InstanceHandle::\$[a-zA-Z]+#'
-        - '#^Access to an undefined property Nette\\Http\\SessionSection::\$[a-zA-Z]++#'
         - '#^Access to an undefined property Nette\\Security\\IIdentity::\$[a-zA-Z]++#'
