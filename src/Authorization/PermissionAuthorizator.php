@@ -36,7 +36,8 @@ class PermissionAuthorizator implements AuthorizatorInterface
     /**
      * @param string|IResource $resource
      * @param string           $privilege
-     * @retrun bool
+     *
+     * @return bool
      */
     public function isAllowed($resource, $privilege)
     {
