@@ -33,7 +33,7 @@ class Permission extends BasePermission
      * @param string|array|Permission::ALL $privileges
      * @param callable|null                $assertion
      *
-     * @return self
+     * @return static
      */
     public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null)
     {
@@ -43,7 +43,9 @@ class Permission extends BasePermission
             };
         }
 
-        return parent::allow($roles, $resources, $privileges, $assertion);
+        parent::allow($roles, $resources, $privileges, $assertion);
+
+        return $this;
     }
 
     /**
@@ -55,7 +57,7 @@ class Permission extends BasePermission
      * @param string|array|Permission::ALL $privileges
      * @param callable|null                $assertion
      *
-     * @return self
+     * @return static
      */
     public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null)
     {
@@ -65,6 +67,8 @@ class Permission extends BasePermission
             };
         }
 
-        return parent::deny($roles, $resources, $privileges, $assertion);
+        parent::deny($roles, $resources, $privileges, $assertion);
+
+        return $this;
     }
 }
