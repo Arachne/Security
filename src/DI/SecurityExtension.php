@@ -70,7 +70,8 @@ class SecurityExtension extends CompilerExtension
     {
         $builder = $this->getContainerBuilder();
 
-        $service = $builder->addDefinition($this->prefix('firewall.'.$firewall))
+        $service = $builder
+            ->addDefinition($this->prefix('firewall.'.$firewall))
             ->setClass($class)
             ->addTag(self::TAG_FIREWALL, $firewall);
 
