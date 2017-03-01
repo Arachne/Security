@@ -60,10 +60,9 @@ class Firewall implements FirewallInterface
 
     /**
      * @param string|int|\DateTime $time
-     * @param bool                 $browserClosed
      */
-    public function setExpiration($time, $browserClosed = true)
+    public function setExpiration($time)
     {
-        $this->storage->setExpiration($time, $browserClosed ? IUserStorage::BROWSER_CLOSED : 0);
+        $this->storage->setExpiration($time);
     }
 }

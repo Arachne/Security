@@ -38,7 +38,6 @@ interface FirewallInterface
 
     /**
      * @param string|int|\DateTime $time
-     * @param bool                 $browserClosed
      */
-    public function setExpiration($time, $browserClosed = true);
+    public function setExpiration($time);
 }
