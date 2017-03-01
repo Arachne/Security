@@ -64,7 +64,7 @@ class PermissionAuthorizatorTest extends Unit
             ->with('role2', 'resource', 'privilege')
             ->returns(true);
 
-        $this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
+        self::assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
 
         $this->permissionHandle
             ->setIdentity
@@ -89,7 +89,7 @@ class PermissionAuthorizatorTest extends Unit
             ->with(PermissionAuthorizator::AUTHENTICATED_ROLE, 'resource', 'privilege')
             ->returns(true);
 
-        $this->assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
+        self::assertTrue($this->authorizator->isAllowed('resource', 'privilege'));
 
         $this->permissionHandle
             ->setIdentity
@@ -107,7 +107,7 @@ class PermissionAuthorizatorTest extends Unit
             ->with(PermissionAuthorizator::GUEST_ROLE, 'resource', 'privilege')
             ->returns(false);
 
-        $this->assertFalse($this->authorizator->isAllowed('resource', 'privilege'));
+        self::assertFalse($this->authorizator->isAllowed('resource', 'privilege'));
 
         $this->permissionHandle
             ->setIdentity

@@ -68,9 +68,9 @@ class UserStorageTest extends Unit
         $section->identity = $identity;
         $section->authenticated = true;
 
-        $this->assertFalse($this->userStorage->isAuthenticated());
-        $this->assertSame($identity, $this->userStorage->getIdentity());
-        $this->assertSame(FirewallInterface::LOGOUT_INVALID_IDENTITY, $this->userStorage->getLogoutReason());
+        self::assertFalse($this->userStorage->isAuthenticated());
+        self::assertSame($identity, $this->userStorage->getIdentity());
+        self::assertSame(FirewallInterface::LOGOUT_INVALID_IDENTITY, $this->userStorage->getLogoutReason());
 
         $this->identityValidatorHandle
             ->validateIdentity
@@ -95,8 +95,8 @@ class UserStorageTest extends Unit
             ->validateIdentity
             ->returns($newIdentity);
 
-        $this->assertTrue($this->userStorage->isAuthenticated());
-        $this->assertSame($newIdentity, $this->userStorage->getIdentity());
+        self::assertTrue($this->userStorage->isAuthenticated());
+        self::assertSame($newIdentity, $this->userStorage->getIdentity());
 
         $this->identityValidatorHandle
             ->validateIdentity

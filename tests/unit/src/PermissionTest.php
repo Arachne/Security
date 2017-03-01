@@ -52,7 +52,7 @@ class PermissionTest extends Unit
 
         $this->permission->setIdentity($identity);
 
-        $this->assertTrue($this->permission->isAllowed($role, $resource, 'privilege'));
+        self::assertTrue($this->permission->isAllowed($role, $resource, 'privilege'));
 
         $assertCallback
             ->calledWith($identity, $resource, $role);
@@ -87,7 +87,7 @@ class PermissionTest extends Unit
 
         $this->permission->setIdentity($identity);
 
-        $this->assertFalse($this->permission->isAllowed($role, $resource, 'privilege'));
+        self::assertFalse($this->permission->isAllowed($role, $resource, 'privilege'));
 
         $assertCallback
             ->calledWith($identity, $resource, $role);

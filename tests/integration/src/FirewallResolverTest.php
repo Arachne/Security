@@ -27,6 +27,7 @@ class FirewallResolverTest extends Unit
 
     public function testIdentityValidator()
     {
+        /** @var Session $session */
         $session = $this->tester->grabService(Session::class);
 
         $section = $session->getSection('Nette.Http.UserStorage/admin');
@@ -36,7 +37,7 @@ class FirewallResolverTest extends Unit
 
         $firewall = call_user_func($this->resolver, 'admin');
 
-        $this->assertInstanceOf(Firewall::class, $firewall);
-        $this->assertTrue($firewall->getIdentity()->validated);
+        self::assertInstanceOf(Firewall::class, $firewall);
+        self::assertTrue($firewall->getIdentity()->validated);
     }
 }
