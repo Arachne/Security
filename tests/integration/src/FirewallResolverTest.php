@@ -22,7 +22,7 @@ class FirewallResolverTest extends Unit
 
     public function _before()
     {
-        $this->resolver = $this->tester->grabService(Container::class)->getService('arachne.servicecollections.1.arachne.security.firewall');
+        $this->resolver = $this->tester->grabService(Container::class)->getService('arachne.serviceCollections.1.arachne.security.firewall');
     }
 
     public function testIdentityValidator()
