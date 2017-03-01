@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use Arachne\Codeception\Module\NetteDIModule;
 use Arachne\Security\Authentication\Firewall;
 use Codeception\Test\Unit;
 use Nette\DI\Container;
@@ -13,6 +14,9 @@ use Nette\Security\Identity;
  */
 class FirewallResolverTest extends Unit
 {
+    /**
+     * @var NetteDIModule
+     */
     protected $tester;
 
     /**

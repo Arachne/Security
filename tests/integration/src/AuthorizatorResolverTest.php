@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use Arachne\Codeception\Module\NetteDIModule;
 use Arachne\Security\Authorization\AuthorizatorInterface;
 use Codeception\Test\Unit;
 use Nette\DI\Container;
@@ -11,6 +12,9 @@ use Nette\DI\Container;
  */
 class AuthorizatorResolverTest extends Unit
 {
+    /**
+     * @var NetteDIModule
+     */
     protected $tester;
 
     /**
