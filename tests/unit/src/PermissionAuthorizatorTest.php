@@ -37,6 +37,17 @@ class PermissionAuthorizatorTest extends Unit
         $this->authorizator = new PermissionAuthorizator($this->firewallHandle->get(), $this->permissionHandle->get());
     }
 
+    public function testAddedRoles()
+    {
+        $this->permissionHandle
+            ->addRole
+            ->calledWith(PermissionAuthorizator::AUTHENTICATED_ROLE);
+
+        $this->permissionHandle
+            ->addRole
+            ->calledWith(PermissionAuthorizator::GUEST_ROLE);
+    }
+
     public function testRoles()
     {
         $identityHandle = Phony::mock(IIdentity::class);

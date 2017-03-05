@@ -31,6 +31,8 @@ class PermissionAuthorizator implements AuthorizatorInterface
     {
         $this->firewall = $firewall;
         $this->permission = $permission;
+        $this->permission->addRole(self::AUTHENTICATED_ROLE);
+        $this->permission->addRole(self::GUEST_ROLE);
     }
 
     /**
