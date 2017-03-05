@@ -17,6 +17,7 @@ matrix:
         - php: hhvm
 
 install:
+    - export PATH="$PATH:$HOME/.composer/vendor/bin"
     - if php -v | grep -q 'PHP 7'; then composer tools; fi
     - composer global require satooshi/php-coveralls ^1.0.0
     - composer update --no-interaction
