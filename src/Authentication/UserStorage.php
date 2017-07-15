@@ -13,12 +13,12 @@ use Nette\Security\IIdentity;
 class UserStorage extends BaseUserStorage
 {
     /**
-     * @var IdentityValidatorInterface
+     * @var IdentityValidatorInterface|null
      */
     private $identityValidator;
 
     /**
-     * @var SessionSection
+     * @var SessionSection|null
      */
     private $sessionSection;
 
@@ -37,7 +37,7 @@ class UserStorage extends BaseUserStorage
     /**
      * @param bool $need
      *
-     * @return SessionSection
+     * @return SessionSection|null
      */
     protected function getSessionSection($need)
     {

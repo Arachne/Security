@@ -12,7 +12,7 @@ use Nette\Utils\Callback;
 class Permission extends BasePermission
 {
     /**
-     * @var IIdentity
+     * @var IIdentity|null
      */
     private $identity;
 

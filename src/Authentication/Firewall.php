@@ -35,7 +35,7 @@ class Firewall implements FirewallInterface
     }
 
     /**
-     * @return IIdentity
+     * @return IIdentity|null
      */
     public function getIdentity()
     {
@@ -43,7 +43,7 @@ class Firewall implements FirewallInterface
     }
 
     /**
-     * @return IIdentity
+     * @return IIdentity|null
      */
     public function getExpiredIdentity()
     {
@@ -51,7 +51,7 @@ class Firewall implements FirewallInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getLogoutReason()
     {
