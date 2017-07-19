@@ -10,7 +10,7 @@ use Nette\Security\IIdentity;
 interface IdentityValidatorInterface
 {
     /**
-     * @return IIdentity
+     * @return IIdentity|null
      */
     public function validateIdentity(IIdentity $identity);
 }
