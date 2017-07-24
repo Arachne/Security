@@ -11,4 +11,3 @@ parameters:
         - '#^Parameter \#[0-9]++ \$[a-zA-Z]++ of class [a-zA-Z\\]++ constructor expects [a-zA-Z\\|]++, Eloquent\\Phony\\Mock\\Mock given#'
         - '#^Parameter \#[0-9]++ \$[a-zA-Z]++ of method [a-zA-Z\\:]++\(\) expects [a-zA-Z\\|]++, Eloquent\\Phony\\Mock\\Mock given#'
         - '#^Access to an undefined property Nette\\Security\\IIdentity::\$[a-zA-Z]++#'
-        - '#^Calling method validateIdentity\(\) on possibly nullable type Arachne\\Security\\Authentication\\IdentityValidatorInterface\|null#'
