@@ -72,13 +72,13 @@ class SecurityExtension extends CompilerExtension
 
         $service = $builder
             ->addDefinition($this->prefix('firewall.'.$firewall))
-            ->setClass($class)
+            ->setType($class)
             ->addTag(self::TAG_FIREWALL, $firewall);
 
         if ($class === Firewall::class || is_subclass_of($class, Firewall::class)) {
             $builder
                 ->addDefinition($this->prefix('storage.'.$firewall))
-                ->setClass(UserStorage::class)
+                ->setType(UserStorage::class)
                 ->setArguments(
                     [
                         'namespace' => $firewall,
