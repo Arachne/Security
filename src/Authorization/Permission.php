@@ -16,10 +16,7 @@ class Permission extends BasePermission
      */
     private $identity;
 
-    /**
-     * @param IIdentity $identity
-     */
-    public function setIdentity(IIdentity $identity = null)
+    public function setIdentity(?IIdentity $identity = null): void
     {
         $this->identity = $identity;
     }
@@ -35,7 +32,7 @@ class Permission extends BasePermission
      *
      * @return static
      */
-    public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null)
+    public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null): Permission
     {
         if ($assertion !== null) {
             $assertion = function () use ($assertion) {
@@ -59,7 +56,7 @@ class Permission extends BasePermission
      *
      * @return static
      */
-    public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null)
+    public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null): Permission
     {
         if ($assertion !== null) {
             $assertion = function () use ($assertion) {

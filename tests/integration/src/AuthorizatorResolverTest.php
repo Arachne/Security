@@ -22,12 +22,12 @@ class AuthorizatorResolverTest extends Unit
      */
     private $resolver;
 
-    public function _before()
+    public function _before(): void
     {
         $this->resolver = $this->tester->grabService(Container::class)->getService('arachne.serviceCollections.1.arachne.security.authorizator');
     }
 
-    public function testIdentityValidator()
+    public function testIdentityValidator(): void
     {
         $this->assertInstanceOf(AuthorizatorInterface::class, call_user_func($this->resolver, 'admin'));
     }

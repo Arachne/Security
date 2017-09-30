@@ -30,14 +30,14 @@ class PermissionAuthorizatorTest extends Unit
      */
     private $authorizator;
 
-    protected function _before()
+    protected function _before(): void
     {
         $this->firewallHandle = Phony::mock(FirewallInterface::class);
         $this->permissionHandle = Phony::mock(Permission::class);
         $this->authorizator = new PermissionAuthorizator($this->firewallHandle->get(), $this->permissionHandle->get());
     }
 
-    public function testAddedRoles()
+    public function testAddedRoles(): void
     {
         $this->permissionHandle
             ->addRole
@@ -48,7 +48,7 @@ class PermissionAuthorizatorTest extends Unit
             ->calledWith(PermissionAuthorizator::GUEST_ROLE);
     }
 
-    public function testRoles()
+    public function testRoles(): void
     {
         $identityHandle = Phony::mock(IIdentity::class);
         $identityHandle
@@ -82,7 +82,7 @@ class PermissionAuthorizatorTest extends Unit
             ->calledWith($identity);
     }
 
-    public function testIdentityWithNoRoles()
+    public function testIdentityWithNoRoles(): void
     {
         $identityHandle = Phony::mock(IIdentity::class);
         $identityHandle
@@ -107,7 +107,7 @@ class PermissionAuthorizatorTest extends Unit
             ->calledWith($identity);
     }
 
-    public function testGuestRole()
+    public function testGuestRole(): void
     {
         $this->firewallHandle
             ->getIdentity

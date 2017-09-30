@@ -20,40 +20,28 @@ class Firewall implements FirewallInterface
         $this->storage = $storage;
     }
 
-    /**
-     * @param IIdentity $identity
-     */
-    public function login(IIdentity $identity)
+    public function login(IIdentity $identity): void
     {
         $this->storage->setIdentity($identity);
         $this->storage->setAuthenticated(true);
     }
 
-    public function logout()
+    public function logout(): void
     {
         $this->storage->setAuthenticated(false);
     }
 
-    /**
-     * @return IIdentity|null
-     */
-    public function getIdentity()
+    public function getIdentity(): ?IIdentity
     {
         return $this->storage->isAuthenticated() ? $this->storage->getIdentity() : null;
     }
 
-    /**
-     * @return IIdentity|null
-     */
-    public function getExpiredIdentity()
+    public function getExpiredIdentity(): ?IIdentity
     {
         return $this->storage->getIdentity();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getLogoutReason()
+    public function getLogoutReason(): ?int
     {
         return $this->storage->getLogoutReason();
     }
@@ -61,7 +49,7 @@ class Firewall implements FirewallInterface
     /**
      * @param string|int|\DateTime $time
      */
-    public function setExpiration($time)
+    public function setExpiration($time): void
     {
         $this->storage->setExpiration($time);
     }

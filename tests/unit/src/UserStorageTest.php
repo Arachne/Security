@@ -32,7 +32,7 @@ class UserStorageTest extends Unit
      */
     private $identityValidatorHandle;
 
-    protected function _before()
+    protected function _before(): void
     {
         $this->sessionHandle = Phony::mock(Session::class);
         $this->sessionHandle
@@ -56,7 +56,7 @@ class UserStorageTest extends Unit
         $this->userStorage = new UserStorage('test', $this->sessionHandle->get(), $this->identityValidatorHandle->get());
     }
 
-    public function testInvalidIdentity()
+    public function testInvalidIdentity(): void
     {
         $identityHandle = Phony::mock(IIdentity::class);
 
@@ -77,7 +77,7 @@ class UserStorageTest extends Unit
             ->calledWith($identity);
     }
 
-    public function testNewIdentity()
+    public function testNewIdentity(): void
     {
         $identityHandle = Phony::mock(IIdentity::class);
         $newIdentityHandle = Phony::mock(IIdentity::class);

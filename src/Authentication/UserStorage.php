@@ -22,12 +22,7 @@ class UserStorage extends BaseUserStorage
      */
     private $sessionSection;
 
-    /**
-     * @param string                     $namespace
-     * @param Session                    $session
-     * @param IdentityValidatorInterface $identityValidator
-     */
-    public function __construct($namespace, Session $session, IdentityValidatorInterface $identityValidator = null)
+    public function __construct(string $namespace, Session $session, ?IdentityValidatorInterface $identityValidator = null)
     {
         parent::__construct($session);
         $this->setNamespace($namespace);
@@ -36,10 +31,8 @@ class UserStorage extends BaseUserStorage
 
     /**
      * @param bool $need
-     *
-     * @return SessionSection|null
      */
-    protected function getSessionSection($need)
+    protected function getSessionSection($need): ?SessionSection
     {
         if (!$this->sessionSection) {
             $section = parent::getSessionSection($need);

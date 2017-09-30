@@ -14,30 +14,18 @@ interface FirewallInterface
     const LOGOUT_INVALID_IDENTITY = 3;
     const LOGOUT_BROWSER_CLOSED = 4;
 
-    /**
-     * @param IIdentity $identity
-     */
-    public function login(IIdentity $identity);
+    public function login(IIdentity $identity): void;
 
-    public function logout();
+    public function logout(): void;
 
-    /**
-     * @return IIdentity
-     */
-    public function getIdentity();
+    public function getIdentity(): ?IIdentity;
 
-    /**
-     * @return IIdentity
-     */
-    public function getExpiredIdentity();
+    public function getExpiredIdentity(): ?IIdentity;
 
-    /**
-     * @return int
-     */
-    public function getLogoutReason();
+    public function getLogoutReason(): ?int;
 
     /**
      * @param string|int|\DateTime $time
      */
-    public function setExpiration($time);
+    public function setExpiration($time): void;
 }

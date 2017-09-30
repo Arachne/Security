@@ -27,7 +27,7 @@ class SecurityExtension extends CompilerExtension
         'firewalls' => [],
     ];
 
-    public function loadConfiguration()
+    public function loadConfiguration(): void
     {
         $this->validateConfig($this->defaults);
         Validators::assertField($this->config, 'firewalls', 'array');
@@ -46,7 +46,7 @@ class SecurityExtension extends CompilerExtension
         $serviceCollectionsExtension->getCollection(ServiceCollectionsExtension::TYPE_RESOLVER, self::TAG_AUTHORIZATOR, AuthorizatorInterface::class);
     }
 
-    public function beforeCompile()
+    public function beforeCompile(): void
     {
         $builder = $this->getContainerBuilder();
 
@@ -66,7 +66,7 @@ class SecurityExtension extends CompilerExtension
         }
     }
 
-    public function addFirewall($firewall, $class = Firewall::class)
+    public function addFirewall(string $firewall, string $class = Firewall::class): void
     {
         $builder = $this->getContainerBuilder();
 
@@ -95,13 +95,9 @@ class SecurityExtension extends CompilerExtension
     }
 
     /**
-     * @param string $class
-     *
      * @throws AssertionException
-     *
-     * @return CompilerExtension
      */
-    private function getExtension($class)
+    private function getExtension(string $class): CompilerExtension
     {
         $extensions = $this->compiler->getExtensions($class);
 

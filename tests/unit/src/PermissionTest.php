@@ -19,12 +19,12 @@ class PermissionTest extends Unit
      */
     private $permission;
 
-    protected function _before()
+    protected function _before(): void
     {
         $this->permission = new Permission();
     }
 
-    public function testAllow()
+    public function testAllow(): void
     {
         $identityHandle = Phony::mock(IIdentity::class);
 
@@ -58,7 +58,7 @@ class PermissionTest extends Unit
             ->calledWith($identity, $resource, $role);
     }
 
-    public function testDeny()
+    public function testDeny(): void
     {
         $identityHandle = Phony::mock(IIdentity::class);
 

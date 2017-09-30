@@ -24,12 +24,12 @@ class FirewallResolverTest extends Unit
      */
     private $resolver;
 
-    public function _before()
+    public function _before(): void
     {
         $this->resolver = $this->tester->grabService(Container::class)->getService('arachne.serviceCollections.1.arachne.security.firewall');
     }
 
-    public function testIdentityValidator()
+    public function testIdentityValidator(): void
     {
         /** @var Session $session */
         $session = $this->tester->grabService(Session::class);
