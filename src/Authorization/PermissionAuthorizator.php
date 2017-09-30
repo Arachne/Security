@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Arachne\Security\Authorization;
 
 use Arachne\Security\Authentication\FirewallInterface;
