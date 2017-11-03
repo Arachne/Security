@@ -34,7 +34,7 @@ class Permission extends BasePermission
      *
      * @return static
      */
-    public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null): Permission
+    public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null): self
     {
         if ($assertion !== null) {
             $assertion = function () use ($assertion) {
@@ -58,7 +58,7 @@ class Permission extends BasePermission
      *
      * @return static
      */
-    public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null): Permission
+    public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, $assertion = null): self
     {
         if ($assertion !== null) {
             $assertion = function () use ($assertion) {
