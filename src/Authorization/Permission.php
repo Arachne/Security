@@ -27,10 +27,10 @@ class Permission extends BasePermission
      * Allows one or more Roles access to [certain $privileges upon] the specified Resource(s).
      * If $assertion is provided, then it must return TRUE in order for rule to apply.
      *
-     * @param string|array|Permission::ALL $roles
-     * @param string|array|Permission::ALL $resources
-     * @param string|array|Permission::ALL $privileges
-     * @param callable|null                $assertion
+     * @param string|array|null $roles
+     * @param string|array|null $resources
+     * @param string|array|null $privileges
+     * @param callable|null     $assertion
      *
      * @return static
      */
@@ -51,10 +51,10 @@ class Permission extends BasePermission
      * Denies one or more Roles access to [certain $privileges upon] the specified Resource(s).
      * If $assertion is provided, then it must return TRUE in order for rule to apply.
      *
-     * @param string|array|Permission::ALL $roles
-     * @param string|array|Permission::ALL $resources
-     * @param string|array|Permission::ALL $privileges
-     * @param callable|null                $assertion
+     * @param string|array|null $roles
+     * @param string|array|null $resources
+     * @param string|array|null $privileges
+     * @param callable|null     $assertion
      *
      * @return static
      */
