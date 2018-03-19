@@ -11,7 +11,7 @@ use Arachne\Security\Authorization\AuthorizatorInterface;
  */
 class Authorizator implements AuthorizatorInterface
 {
-    public function isAllowed($resource, string $privilege): bool
+    public function isAllowed($resource, ?string $privilege): bool
     {
     }
 }
