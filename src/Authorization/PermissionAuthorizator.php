@@ -40,7 +40,7 @@ class PermissionAuthorizator implements AuthorizatorInterface
     /**
      * @param string|IResource $resource
      */
-    public function isAllowed($resource, string $privilege): bool
+    public function isAllowed($resource, ?string $privilege): bool
     {
         $identity = $this->firewall->getIdentity();
         $this->permission->setIdentity($identity);

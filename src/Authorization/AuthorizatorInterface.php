@@ -14,5 +14,5 @@ interface AuthorizatorInterface
     /**
      * @param string|IResource $resource
      */
-    public function isAllowed($resource, string $privilege): bool;
+    public function isAllowed($resource, ?string $privilege): bool;
 }
