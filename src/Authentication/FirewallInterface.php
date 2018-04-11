@@ -27,7 +27,7 @@ interface FirewallInterface
     public function getLogoutReason(): ?int;
 
     /**
-     * @param string|int|\DateTime $time
+     * @param string|int|\DateTimeInterface $time
      */
     public function setExpiration($time): void;
 }
