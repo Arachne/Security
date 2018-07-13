@@ -31,6 +31,6 @@ class AuthorizatorResolverTest extends Unit
 
     public function testIdentityValidator(): void
     {
-        $this->assertInstanceOf(AuthorizatorInterface::class, call_user_func($this->resolver, 'admin'));
+        self::assertInstanceOf(AuthorizatorInterface::class, call_user_func($this->resolver, 'admin'));
     }
 }
