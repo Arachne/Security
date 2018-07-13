@@ -11,6 +11,9 @@ use Arachne\Security\Authorization\AuthorizatorInterface;
  */
 class Authorizator implements AuthorizatorInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function isAllowed($resource, string $privilege): bool
     {
     }

@@ -44,7 +44,7 @@ class PermissionAuthorizator implements AuthorizatorInterface
     {
         $identity = $this->firewall->getIdentity();
         $this->permission->setIdentity($identity);
-        if ($identity) {
+        if ($identity !== null) {
             $roles = $identity->getRoles();
             // Add a role to make sure even identities without any roles will invoke permission.
             $roles[] = self::AUTHENTICATED_ROLE;
