@@ -36,10 +36,10 @@ class UserStorage extends BaseUserStorage
      */
     protected function getSessionSection($need): ?SessionSection
     {
-        if (is_null($this->sessionSection)) {
+        if ($this->sessionSection === null) {
             $section = parent::getSessionSection($need);
 
-            if (!is_null($this->identityValidator) && !is_null($section) && $section->authenticated) {
+            if ($this->identityValidator !== null && $section !== null && $section->authenticated) {
                 $identity = $this->identityValidator->validateIdentity($section->identity);
 
                 if ($identity instanceof IIdentity) {

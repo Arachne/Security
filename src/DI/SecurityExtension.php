@@ -103,7 +103,7 @@ class SecurityExtension extends CompilerExtension
     {
         $extensions = $this->compiler->getExtensions($class);
 
-        if (count($extensions) === 0) {
+        if (!(bool) $extensions) {
             throw new AssertionException(
                 sprintf('Extension "%s" requires "%s" to be installed.', get_class($this), $class)
             );
