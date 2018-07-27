@@ -39,7 +39,7 @@ class UserStorage extends BaseUserStorage
         if ($this->sessionSection === null) {
             $section = parent::getSessionSection($need);
 
-            if ($this->identityValidator !== null && $section !== null && $section->authenticated) {
+            if ($this->identityValidator !== null && $section !== null && $section->authenticated === true) {
                 $identity = $this->identityValidator->validateIdentity($section->identity);
 
                 if ($identity instanceof IIdentity) {
@@ -47,7 +47,7 @@ class UserStorage extends BaseUserStorage
                 } else {
                     $section->authenticated = false;
                     $section->reason = FirewallInterface::LOGOUT_INVALID_IDENTITY;
-                    if ($section->expireIdentity) {
+                    if ($section->expireIdentity === true) {
                         unset($section->identity);
                     }
                     unset($section->expireTime, $section->expireDelta, $section->expireIdentity, $section->expireBrowser, $section->browserCheck, $section->authTime);
