@@ -48,6 +48,7 @@ class PermissionAuthorizator implements AuthorizatorInterface
             $roles = $identity->getRoles();
             // Add a role to make sure even identities without any roles will invoke permission.
             $roles[] = self::AUTHENTICATED_ROLE;
+            $roles = array_unique($roles);
         } else {
             $roles = [self::GUEST_ROLE];
         }
