@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Integration;
 
-use Arachne\Codeception\Module\NetteDIModule;
 use Arachne\Security\Authentication\Firewall;
 use Codeception\Test\Unit;
+use Contributte\Codeception\Module\NetteDIModule;
 use Nette\DI\Container;
 use Nette\Http\Session;
 use Nette\Security\Identity;
