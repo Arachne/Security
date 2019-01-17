@@ -10,4 +10,6 @@ parameters:
         - %rootDir%/../../../tests/_*
 
     ignoreErrors:
-        - '#^Access to an undefined property Nette\\Security\\IIdentity::\$[a-zA-Z]++#'
+        - '~^Access to an undefined property Nette\\Security\\IIdentity::\$[a-zA-Z]++~'
+        - '~^Parameter #[0-9]++ \$[a-zA-Z]++ \([a-z()|]+\) of method Arachne\\Security\\Authorization\\Permission::[a-zA-Z]++\(\) should be contravariant with parameter \$[a-zA-Z]++ \(mixed\) of method Nette\\Security\\Permission::[a-zA-Z]++\(\)~'
+        - '~^Parameter #1 \$need \(bool\) of method Arachne\\Security\\Authentication\\UserStorage::getSessionSection\(\) should be contravariant with parameter \$need \(mixed\) of method Nette\\Http\\UserStorage::getSessionSection\(\)~'
